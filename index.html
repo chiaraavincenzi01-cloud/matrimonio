@@ -8,10 +8,10 @@
 
 body{
 margin:0;
-font-family: "Georgia", serif;
-background:#fdfaf6;
-overflow:hidden;
+font-family: 'Georgia', serif;
+background:linear-gradient(#fffdf8,#f7f3ea);
 text-align:center;
+overflow:hidden;
 }
 
 /* BUSTA */
@@ -21,37 +21,38 @@ position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-width:320px;
-height:220px;
-background:#f8f6f2;
-border-radius:6px;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
+width:360px;
+height:240px;
+background:#f8f6f0;
+border-radius:8px;
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
 cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
+/* SIGILLO */
+
 #seal{
-position:absolute;
-top:90px;
-left:50%;
-transform:translateX(-50%);
-width:70px;
-height:70px;
+width:80px;
+height:80px;
 background:#f4a261;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-weight:bold;
 color:white;
-font-size:20px;
-box-shadow:0 4px 10px rgba(0,0,0,0.3);
+font-weight:bold;
+font-size:26px;
+box-shadow:0 6px 15px rgba(0,0,0,0.3);
 }
 
 /* INVITO */
 
-#invite{
+#invito{
 display:none;
-padding:40px;
+padding:50px;
 animation:fade 2s;
 }
 
@@ -60,13 +61,30 @@ from{opacity:0}
 to{opacity:1}
 }
 
+h1{
+font-size:48px;
+color:#7a4b3a;
+margin-bottom:10px;
+}
+
+h2{
+font-weight:normal;
+color:#a67c52;
+}
+
+p{
+font-size:20px;
+color:#444;
+line-height:1.6;
+}
+
 /* PETALI */
 
 .petal{
 position:fixed;
 top:-20px;
-width:10px;
-height:10px;
+width:12px;
+height:12px;
 border-radius:50%;
 opacity:0.8;
 animation:fall linear infinite;
@@ -78,58 +96,45 @@ transform:translateY(110vh);
 }
 }
 
-h1{
-font-size:40px;
-margin-top:30px;
-}
-
-.details{
-font-size:20px;
-margin-top:20px;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- BUSTA -->
-
 <div id="envelope" onclick="openInvite()">
 <div id="seal">C&G</div>
 </div>
 
-<!-- MUSICA -->
-
 <audio id="music" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a0c6a9c4.mp3" type="audio/mpeg">
 </audio>
 
-<!-- INVITO -->
+<div id="invito">
 
-<div id="invite">
+<h1>Chiara Vincenzi</h1>
+<h2>&</h2>
+<h1>Gregorio Tronchin</h1>
 
-<h1>Chiara & Gregorio</h1>
-
-<p class="details">
-Con grande gioia vi invitiamo al nostro matrimonio
+<p>
+Con grande gioia<br>
+vi invitiamo a celebrare il nostro matrimonio
 </p>
 
-<p class="details">
+<p>
 3 Ottobre 2026<br>
 Ore 11:00
 </p>
 
-<p class="details">
+<p>
 Chiesa Parrocchiale dei<br>
 Santi Gervasio e Protasio Martiri<br>
 Santrovaso di Preganziol
 </p>
 
-<p class="details">
+<p>
 Dopo la cerimonia<br>
-festeggeremo insieme presso<br>
-Villa Luppis – Pordenone
+saremo lieti di festeggiare insieme a voi presso<br>
+Villa Luppis – Pasiano di Pordenone
 </p>
 
 </div>
@@ -140,28 +145,29 @@ function openInvite(){
 
 document.getElementById("envelope").style.display="none";
 
-document.getElementById("invite").style.display="block";
+document.getElementById("invito").style.display="block";
 
 document.getElementById("music").play();
 
 startPetals();
+
 }
 
 function startPetals(){
 
-for(let i=0;i<40;i++){
+for(let i=0;i<50;i++){
 
 let petal=document.createElement("div");
 
 petal.classList.add("petal");
 
-let colors=["#f4a261","#ffffff","#9caf88"];
+let colors=["#f4a261","#ffffff","#a3b18a"];
 
-petal.style.background=colors[Math.floor(Math.random()*colors.length)];
+petal.style.background=colors[Math.floor(Math.random()*3)];
 
 petal.style.left=Math.random()*100+"vw";
 
-petal.style.animationDuration=(5+Math.random()*5)+"s";
+petal.style.animationDuration=(6+Math.random()*6)+"s";
 
 document.body.appendChild(petal);
 
