@@ -9,20 +9,11 @@ margin:0;
 font-family:'Georgia', serif;
 overflow:hidden;
 text-align:center;
-background:#fefaf0;
+background: url('https://cdn.pixabay.com/photo/2017/12/03/18/21/villa-2997905_1280.jpg') no-repeat center center fixed;
+background-size: cover;
 }
 
-/* Canvas per sfondo pittorico */
-#bgCanvas{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:0;
-}
-
-/* BUSTA 3D */
+/* Busta */
 #envelope{
 position:absolute;
 top:50%;
@@ -37,7 +28,7 @@ cursor:pointer;
 display:flex;
 align-items:center;
 justify-content:center;
-transition: transform 1s ease;
+transition: all 1s ease;
 z-index:10;
 }
 #seal{
@@ -54,27 +45,22 @@ font-size:28px;
 box-shadow:0 6px 15px rgba(0,0,0,0.4);
 }
 
-/* INVITO */
+/* Invito */
 #invito{
 display:none;
 padding:50px;
-animation:fade 2s;
-position:relative;
-z-index:5;
-color:#444;
 background: rgba(255,255,255,0.85);
 border-radius:15px;
 margin:50px auto;
 width:80%;
 max-width:700px;
+z-index:5;
 }
-@keyframes fade { from{opacity:0} to{opacity:1} }
-
 h1{ font-size:50px; color:#7a4b3a; margin:0; }
 h2{ font-weight:normal; color:#a67c52; margin:5px 0 20px 0; }
 p{ font-size:20px; line-height:1.6; }
 
-/* PETALI */
+/* Petali */
 .petal{
 position:fixed;
 top:-20px;
@@ -82,184 +68,122 @@ width:12px;
 height:12px;
 border-radius:50%;
 opacity:0.85;
-z-index:4;
+background:#f4a261;
+animation:fall linear infinite;
+}
+@keyframes fall{
+0%{top:-20px;}
+100%{top:110vh;}
 }
 
-/* UCCELLINI */
+/* Uccellini */
 .bird{
 position:fixed;
 width:40px;
 height:40px;
 background: url('https://cdn.pixabay.com/photo/2017/01/31/18/19/bird-2022607_1280.png') no-repeat;
 background-size:contain;
-z-index:5;
+animation:fly linear infinite;
 }
+@keyframes fly{ 0%{left:-50px;} 100%{left:110vw;} }
 
 /* RSVP */
 #rsvp{
 margin-top:30px;
-padding:30px;
-border-radius:15px;
+padding:20px;
 display:none;
 }
 #rsvp input, #rsvp textarea{
 width:80%;
 padding:10px;
-margin:10px 0;
-font-size:16px;
+margin:5px 0;
 border-radius:5px;
-border:1px solid #ccc;
 }
 #rsvp button{
-padding:12px 25px;
-font-size:18px;
+padding:10px 20px;
 background:#f4a261;
 color:white;
 border:none;
-border-radius:8px;
+border-radius:5px;
 cursor:pointer;
 }
 
-/* COUNTDOWN */
-#countdown{
-font-size:24px;
-margin-top:20px;
-color:#7a4b3a;
-}
+/* Countdown */
+#countdown{ font-size:20px; margin-top:10px; color:#7a4b3a; }
 </style>
 </head>
 <body>
 
-<canvas id="bgCanvas"></canvas>
+<!-- Busta -->
+<div id="envelope" onclick="openInvite()"><div id="seal">C&G</div></div>
 
-<!-- BUSTA -->
-<div id="envelope" onclick="openInvite()">
-<div id="seal">C&G</div>
-</div>
-
-<!-- MUSICA -->
+<!-- Musica -->
 <audio id="music" loop>
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a0c6a9c4.mp3" type="audio/mpeg">
 </audio>
 
-<!-- INVITO -->
+<!-- Invito -->
 <div id="invito">
 <h1>Chiara Vincenzi</h1>
 <h2>&</h2>
 <h1>Gregorio Tronchin</h1>
-
-<p>Con grande gioia<br>vi invitiamo a celebrare il nostro matrimonio</p>
-<p>3 Ottobre 2026<br>Ore 11:00</p>
-<p>Chiesa Parrocchiale dei<br>Santi Gervasio e Protasio Martiri<br>Santrovaso di Preganziol</p>
-<p>Dopo la cerimonia<br>festeggeremo presso<br>Villa Luppis – Pordenone</p>
-
+<p>3 Ottobre 2026, Ore 11:00</p>
+<p>Chiesa Parrocchiale dei Santi Gervasio e Protasio Martiri</p>
+<p>Villa Luppis, Pordenone</p>
 <div id="countdown"></div>
 
 <div id="rsvp">
 <h2>Conferma presenza</h2>
-<input type="text" id="nome" placeholder="Nome e Cognome" required>
-<input type="text" id="partecipanti" placeholder="Numero di persone" required>
-<textarea id="allergie" placeholder="Segnala eventuali allergie"></textarea>
-<button onclick="submitRSVP()">Invia conferma</button>
-<p id="thanks" style="color:#7a4b3a;"></p>
+<input type="text" id="nome" placeholder="Nome e Cognome">
+<input type="text" id="partecipanti" placeholder="Numero persone">
+<textarea id="allergie" placeholder="Segnala allergie"></textarea>
+<button onclick="submitRSVP()">Invia</button>
+<p id="thanks"></p>
 </div>
 </div>
 
-<!-- UCCELLINI -->
+<!-- Uccellini -->
 <div class="bird" style="top:20%; animation-duration:25s;"></div>
-<div class="bird" style="top:40%; animation-duration:30s;"></div>
-<div class="bird" style="top:60%; animation-duration:28s;"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<div class="bird" style="top:50%; animation-duration:30s;"></div>
 
 <script>
-/* --- SFONDO QUADRO PITTORICO --- */
-const canvas=document.getElementById("bgCanvas");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-function drawBackground(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-// effetto pittura digitale: gradienti morbidi + pattern leggeri
-let gradient=ctx.createLinearGradient(0,0,canvas.width,canvas.height);
-gradient.addColorStop(0,'#fefaf0');
-gradient.addColorStop(1,'#f7f3ea');
-ctx.fillStyle=gradient;
-ctx.fillRect(0,0,canvas.width,canvas.height);
-// simulazione pennellate leggere
-for(let i=0;i<200;i++){
-ctx.fillStyle=`rgba(244,162,97,${Math.random()*0.05})`;
-ctx.beginPath();
-ctx.arc(Math.random()*canvas.width, Math.random()*canvas.height, 50*Math.random(), 0, 2*Math.PI);
-ctx.fill();
-}
-}
-drawBackground();
-setInterval(drawBackground,20000);
-
-/* --- APRI INVITO --- */
 function openInvite(){
-gsap.to("#envelope",{duration:1,scale:0.5,rotationY:180});
-setTimeout(()=>{
 document.getElementById("envelope").style.display="none";
 document.getElementById("invito").style.display="block";
 document.getElementById("rsvp").style.display="block";
 document.getElementById("music").play();
-startPetals();
+createPetals();
 startCountdown();
-},1000);
 }
-
-/* --- PETALI REALISTICI --- */
-function startPetals(){
-for(let i=0;i<60;i++){
-let petal=document.createElement("div");
-petal.classList.add("petal");
-let colors=["#f4a261","#ffffff","#a3b18a"];
-petal.style.background=colors[Math.floor(Math.random()*3)];
-document.body.appendChild(petal);
-gsap.set(petal,{
-x:Math.random()*window.innerWidth,
-y:-20,
-rotation:Math.random()*360,
-scale:Math.random()*1.2+0.3
-});
-gsap.to(petal,{
-y:window.innerHeight+20,
-rotation:Math.random()*720,
-duration:5+Math.random()*5,
-repeat:-1,
-ease:"linear",
-delay:Math.random()*5
-});
+function createPetals(){
+for(let i=0;i<50;i++){
+let p=document.createElement("div");
+p.className="petal";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(3+Math.random()*4)+"s";
+document.body.appendChild(p);
 }
 }
-
-/* --- RSVP --- */
 function submitRSVP(){
-let nome=document.getElementById("nome").value;
-let partecipanti=document.getElementById("partecipanti").value;
-let allergie=document.getElementById("allergie").value;
-if(nome && partecipanti){
-document.getElementById("thanks").innerHTML=`Grazie ${nome}! Conferma ricevuta.`;
+let n=document.getElementById("nome").value;
+let np=document.getElementById("partecipanti").value;
+let a=document.getElementById("allergie").value;
+if(n && np){
+document.getElementById("thanks").innerText="Grazie "+n+"! Conferma ricevuta.";
 document.getElementById("rsvp").style.display="none";
-console.log("RSVP inviato:", {nome, partecipanti, allergie});
-} else { alert("Inserisci nome e numero di persone."); }
+console.log({n,np,a});
+} else alert("Inserisci nome e numero di persone");
 }
-
-/* --- COUNTDOWN --- */
 function startCountdown(){
 let countDate=new Date("Oct 3, 2026 11:00:00").getTime();
-let x=setInterval(function(){
+setInterval(()=>{
 let now=new Date().getTime();
-let distance=countDate-now;
-let days=Math.floor(distance/(1000*60*60*24));
-let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-let seconds=Math.floor((distance%(1000*60))/1000);
-document.getElementById("countdown").innerHTML=`Manca ${days} giorni ${hours} ore ${minutes} minuti ${seconds} secondi`;
-if(distance<0){ clearInterval(x); document.getElementById("countdown").innerHTML="È il vostro giorno!"; }
+let d=countDate-now;
+let days=Math.floor(d/(1000*60*60*24));
+let h=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+let m=Math.floor((d%(1000*60*60))/(1000*60));
+let s=Math.floor((d%(1000*60))/1000);
+document.getElementById("countdown").innerText=`Manca ${days} giorni ${h} ore ${m} minuti ${s} secondi`;
 },1000);
 }
 </script>
