@@ -3,40 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Chiara & Gregorio</title>
-
 <style>
-
-body{
+body {
 margin:0;
-font-family: 'Georgia', serif;
-background:linear-gradient(#fffdf8,#f7f3ea);
-text-align:center;
+font-family:'Georgia', serif;
 overflow:hidden;
+text-align:center;
+background: url('https://cdn.pixabay.com/photo/2017/12/03/18/21/villa-2997905_1280.jpg') no-repeat center center fixed;
+background-size: cover;
 }
 
-/* BUSTA */
-
-#envelope{
+/* --- BUSTA --- */
+#envelope {
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-width:360px;
-height:240px;
+width:380px;
+height:250px;
 background:#f8f6f0;
-border-radius:8px;
-box-shadow:0 15px 40px rgba(0,0,0,0.2);
+border-radius:10px;
+box-shadow:0 15px 40px rgba(0,0,0,0.25);
 cursor:pointer;
 display:flex;
 align-items:center;
 justify-content:center;
+transition: transform 1s ease;
+z-index:10;
 }
-
-/* SIGILLO */
-
-#seal{
-width:80px;
-height:80px;
+#seal {
+width:90px;
+height:90px;
 background:#f4a261;
 border-radius:50%;
 display:flex;
@@ -44,138 +41,182 @@ align-items:center;
 justify-content:center;
 color:white;
 font-weight:bold;
-font-size:26px;
-box-shadow:0 6px 15px rgba(0,0,0,0.3);
+font-size:28px;
+box-shadow:0 6px 15px rgba(0,0,0,0.4);
 }
 
-/* INVITO */
-
-#invito{
+/* --- INVITO --- */
+#invito {
 display:none;
 padding:50px;
 animation:fade 2s;
-}
-
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
-}
-
-h1{
-font-size:48px;
-color:#7a4b3a;
-margin-bottom:10px;
-}
-
-h2{
-font-weight:normal;
-color:#a67c52;
-}
-
-p{
-font-size:20px;
+position:relative;
+z-index:5;
 color:#444;
-line-height:1.6;
+background: rgba(255,255,255,0.8);
+border-radius:15px;
+margin:50px auto;
+width:80%;
+max-width:700px;
 }
+@keyframes fade { from{opacity:0} to{opacity:1} }
 
-/* PETALI */
+h1 { font-size:50px; color:#7a4b3a; margin:0; }
+h2 { font-weight:normal; color:#a67c52; margin:5px 0 20px 0; }
+p { font-size:20px; line-height:1.6; }
 
-.petal{
+/* --- PETALI REALISTICI --- */
+.petal {
 position:fixed;
 top:-20px;
 width:12px;
 height:12px;
 border-radius:50%;
-opacity:0.8;
-animation:fall linear infinite;
+opacity:0.85;
+animation-name:fall;
+animation-timing-function:linear;
+animation-iteration-count:infinite;
+transform-origin:center;
+}
+@keyframes fall { 0%{transform: translateY(0) rotate(0deg);} 100%{transform: translateY(110vh) rotate(360deg);} }
+
+/* --- UCCELLINI --- */
+.bird {
+position:fixed;
+top:30%;
+width:30px;
+height:30px;
+background: url('https://cdn.pixabay.com/photo/2017/01/31/18/19/bird-2022607_1280.png') no-repeat;
+background-size:contain;
+animation:fly linear infinite;
+}
+@keyframes fly { 0%{left:-50px;} 50%{left:calc(100% + 50px);} 100%{left:-50px;} }
+
+/* --- RSVP FORM --- */
+#rsvp {
+margin-top:30px;
+padding:30px;
+border-radius:15px;
+display:none;
+}
+#rsvp input, #rsvp textarea {
+width:80%;
+padding:10px;
+margin:10px 0;
+font-size:16px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+#rsvp button {
+padding:12px 25px;
+font-size:18px;
+background:#f4a261;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
 }
 
-@keyframes fall{
-to{
-transform:translateY(110vh);
+/* --- COUNTDOWN --- */
+#countdown {
+font-size:24px;
+margin-top:20px;
+color:#7a4b3a;
 }
-}
-
 </style>
 </head>
-
 <body>
 
+<!-- BUSTA -->
 <div id="envelope" onclick="openInvite()">
 <div id="seal">C&G</div>
 </div>
 
+<!-- MUSICA -->
 <audio id="music" loop>
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a0c6a9c4.mp3" type="audio/mpeg">
 </audio>
 
+<!-- INVITO -->
 <div id="invito">
-
 <h1>Chiara Vincenzi</h1>
 <h2>&</h2>
 <h1>Gregorio Tronchin</h1>
+<p>Con grande gioia<br>vi invitiamo a celebrare il nostro matrimonio</p>
+<p>3 Ottobre 2026<br>Ore 11:00</p>
+<p>Chiesa Parrocchiale dei<br>Santi Gervasio e Protasio Martiri<br>Santrovaso di Preganziol</p>
+<p>Dopo la cerimonia<br>festeggeremo presso<br>Villa Luppis – Pordenone</p>
+<div id="countdown"></div>
 
-<p>
-Con grande gioia<br>
-vi invitiamo a celebrare il nostro matrimonio
-</p>
-
-<p>
-3 Ottobre 2026<br>
-Ore 11:00
-</p>
-
-<p>
-Chiesa Parrocchiale dei<br>
-Santi Gervasio e Protasio Martiri<br>
-Santrovaso di Preganziol
-</p>
-
-<p>
-Dopo la cerimonia<br>
-saremo lieti di festeggiare insieme a voi presso<br>
-Villa Luppis – Pasiano di Pordenone
-</p>
-
+<!-- RSVP -->
+<div id="rsvp">
+<h2>Conferma presenza</h2>
+<input type="text" id="nome" placeholder="Nome e Cognome" required>
+<input type="text" id="partecipanti" placeholder="Numero di persone" required>
+<textarea id="allergie" placeholder="Segnala eventuali allergie"></textarea>
+<button onclick="submitRSVP()">Invia conferma</button>
+<p id="thanks" style="color:#7a4b3a;"></p>
+</div>
 </div>
 
+<!-- UCCELLINI -->
+<div class="bird" style="top:20%; animation-duration:25s;"></div>
+<div class="bird" style="top:40%; animation-duration:30s;"></div>
+<div class="bird" style="top:60%; animation-duration:28s;"></div>
+
 <script>
-
 function openInvite(){
-
+document.getElementById("envelope").style.transform="scale(0.5) rotateY(180deg)";
+setTimeout(()=>{
 document.getElementById("envelope").style.display="none";
-
 document.getElementById("invito").style.display="block";
-
+document.getElementById("rsvp").style.display="block";
 document.getElementById("music").play();
-
 startPetals();
-
+startCountdown();
+},1000);
 }
 
 function startPetals(){
-
-for(let i=0;i<50;i++){
-
+for(let i=0;i<60;i++){
 let petal=document.createElement("div");
-
 petal.classList.add("petal");
-
 let colors=["#f4a261","#ffffff","#a3b18a"];
-
 petal.style.background=colors[Math.floor(Math.random()*3)];
-
 petal.style.left=Math.random()*100+"vw";
-
-petal.style.animationDuration=(6+Math.random()*6)+"s";
-
+petal.style.animationDuration=(5+Math.random()*5)+"s";
+petal.style.width=(8+Math.random()*8)+"px";
+petal.style.height=petal.style.width;
+petal.style.opacity=(0.6+Math.random()*0.3);
+petal.style.transform=`rotate(${Math.random()*360}deg)`;
 document.body.appendChild(petal);
-
+}
 }
 
+function submitRSVP(){
+let nome=document.getElementById("nome").value;
+let partecipanti=document.getElementById("partecipanti").value;
+let allergie=document.getElementById("allergie").value;
+if(nome && partecipanti){
+document.getElementById("thanks").innerHTML=`Grazie ${nome}! Conferma ricevuta.`;
+document.getElementById("rsvp").style.display="none";
+console.log("RSVP inviato:", {nome, partecipanti, allergie});
+} else { alert("Inserisci nome e numero di persone."); }
 }
 
+function startCountdown(){
+let countDate=new Date("Oct 3, 2026 11:00:00").getTime();
+let x=setInterval(function(){
+let now=new Date().getTime();
+let distance=countDate-now;
+let days=Math.floor(distance/(1000*60*60*24));
+let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+let seconds=Math.floor((distance%(1000*60))/1000);
+document.getElementById("countdown").innerHTML=`Manca ${days} giorni ${hours} ore ${minutes} minuti ${seconds} secondi`;
+if(distance<0){ clearInterval(x); document.getElementById("countdown").innerHTML="È il vostro giorno!"; }
+},1000);
+}
 </script>
-
 </body>
 </html>
