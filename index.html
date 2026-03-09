@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chiara & Gregorio | 03.10.2026</title>
+    <title>Chiara & Gregorio | Wedding Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
     
     <style>
@@ -11,247 +11,245 @@
             --salvia: #9db2a2;
             --perla: #fdfcf9;
             --arancio: #f4b084;
-            --gold: #d4af37;
+            --testo: #4a4a4a;
         }
 
-        body, html {
-            margin: 0; padding: 0;
-            background-color: var(--perla);
-            font-family: 'Montserrat', sans-serif;
-            color: #444;
-            overflow-x: hidden;
-        }
+        body, html { margin: 0; padding: 0; background: var(--perla); font-family: 'Montserrat', sans-serif; color: var(--testo); overflow-x: hidden; }
 
-        /* --- BUSTA FULL SCREEN --- */
+        /* --- BUSTA LUXURY FULL SCREEN --- */
         #envelope-wrapper {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #e5e0d5;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+            background: #e2dfd5;
+            z-index: 5000;
+            display: flex; justify-content: center; align-items: center;
+            transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        .envelope-paper {
-            width: 90vw; max-width: 600px;
-            height: 400px;
-            background: radial-gradient(circle, #fff, #f0f0f0); /* Perlescente */
+        .envelope {
             position: relative;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.1);
+            width: 600px; height: 400px;
+            background: #fff;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.15);
+            border-radius: 2px;
         }
 
-        /* Sigillo in Ceralacca con Ulivo */
+        /* Il flap della busta */
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0; width: 0; height: 0;
+            border-top: 220px solid #f9f7f2;
+            border-left: 300px solid transparent;
+            border-right: 300px solid transparent;
+            z-index: 2;
+        }
+
+        /* Ceralacca con Ulivo */
         .wax-seal {
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+            top: 180px; left: 50%;
+            transform: translateX(-50%);
             width: 100px; height: 100px;
             background: var(--arancio);
             border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: 'Cormorant Garamond';
-            font-size: 1.8rem;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.2), 0 5px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
             z-index: 10;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-family: 'Cormorant Garamond'; font-size: 1.8rem;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.2);
+            transition: 0.3s;
         }
 
         .wax-seal::after {
-            content: "🌿"; /* Simbolo Ulivo */
+            content: ""; /* Ulivo decorativo */
             position: absolute;
-            bottom: -15px;
-            font-size: 1.5rem;
-            filter: sepia(1) saturate(0.5);
+            bottom: -10px; font-size: 1.8rem;
+            filter: sepia(0.5) brightness(0.9);
         }
 
-        /* --- CONTENUTO --- */
+        .wax-seal:hover { transform: translateX(-50%) scale(1.05); }
+
+        /* --- SITO PRINCIPALE --- */
         #main-site { display: none; opacity: 0; transition: opacity 2s; }
 
-        .hero-image {
+        /* Immagine Pittura ad Olio Villa Luppis */
+        .hero-painting {
             width: 100%;
-            height: 60vh;
+            height: 70vh;
             background: url('https://i.postimg.cc/85zM6m7b/Gemini-Generated-Image-mo62n8mo62n8mo62.png') no-repeat center center;
             background-size: cover;
             position: relative;
-            border-bottom: 5px solid var(--perla);
+            border-bottom: 8px solid white;
         }
 
         /* Uccellini Svolazzanti */
         .bird {
-            position: absolute;
-            width: 15px; height: 15px;
+            position: absolute; width: 18px; height: 18px;
             background: url('https://www.transparentpng.com/download/birds/flying-birds-png-transparent-images--3.png') no-repeat;
-            background-size: contain;
-            opacity: 0.5;
-            animation: soar 15s linear infinite;
+            background-size: contain; opacity: 0.6;
+            animation: fly-birds 20s linear infinite;
         }
 
-        @keyframes soar {
-            0% { left: -5%; top: 20%; transform: scale(0.5); }
-            100% { left: 105%; top: 10%; transform: scale(0.8); }
+        @keyframes fly-birds {
+            from { left: -5%; top: 30%; transform: scale(0.6); }
+            to { left: 105%; top: 15%; transform: scale(0.9); }
         }
-
-        .section { padding: 80px 20px; text-align: center; max-width: 800px; margin: 0 auto; }
-
-        h1 { font-family: 'Cormorant Garamond'; font-size: 3.5rem; color: var(--salvia); margin: 10px 0; }
 
         /* Countdown Regale */
-        .timer-container {
+        .countdown-frame {
             background: var(--salvia);
             color: white;
-            padding: 40px;
-            border-radius: 2px;
-            display: flex;
-            justify-content: space-around;
-            margin: 40px 0;
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 15px 30px rgba(157, 178, 162, 0.3);
+            padding: 50px 20px;
+            margin: -50px auto 50px;
+            max-width: 800px;
+            position: relative;
+            z-index: 20;
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            border: 1px solid white;
+            outline: 2px solid var(--salvia);
+            outline-offset: 6px;
+            text-align: center;
         }
-        .timer-unit span { display: block; font-size: 2.5rem; font-family: 'Cormorant Garamond'; }
-        .timer-unit label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* Regali / IBAN */
-        .gift-box {
+        .unit span { display: block; font-size: 3rem; font-family: 'Cormorant Garamond'; }
+        .unit label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; }
+
+        /* Sezioni */
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+        
+        h1 { font-family: 'Cormorant Garamond'; font-size: 4rem; color: var(--salvia); margin: 0; }
+        h2 { font-family: 'Cormorant Garamond'; font-size: 2.5rem; color: var(--salvia); margin-bottom: 10px; }
+
+        .btn-maps {
+            display: inline-block; padding: 15px 40px; margin-top: 20px;
+            background: var(--arancio); color: white; text-decoration: none;
+            letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s;
+        }
+        .btn-maps:hover { letter-spacing: 4px; background: #e09b6e; }
+
+        /* IBAN */
+        .iban-section {
             background: #f4f6f4;
-            padding: 40px;
+            padding: 50px;
             border: 1px dashed var(--salvia);
             margin: 40px 0;
         }
 
-        /* Mappe */
-        .map-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--arancio);
-            text-decoration: none;
-            font-weight: bold;
-            border-bottom: 1px solid var(--arancio);
-        }
-
         /* Petali */
         .petal {
-            position: fixed; top: -10%; 
-            background: #fffafa; border-radius: 150% 0 150% 100%;
-            z-index: 999; pointer-events: none;
-            animation: fall linear infinite;
+            position: fixed; width: 12px; height: 12px; background: #fff;
+            border-radius: 150% 0 150% 100%; z-index: 4000; pointer-events: none;
+            animation: fall-petals linear infinite;
+        }
+        @keyframes fall-petals {
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0); opacity: 0; }
-            10% { opacity: 0.8; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        @media (max-width: 600px) {
+            .envelope { width: 90vw; height: 280px; }
+            .envelope::before { border-top-width: 150px; border-left-width: 45vw; border-right-width: 45vw; }
+            .wax-seal { top: 120px; width: 80px; height: 80px; }
+            h1 { font-size: 2.5rem; }
+            .countdown-frame { grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
-
-        button {
-            background: var(--arancio); color: white; border: none;
-            padding: 15px 40px; cursor: pointer; text-transform: uppercase;
-            letter-spacing: 2px; transition: 0.4s;
-        }
-        button:hover { background: var(--salvia); }
     </style>
 </head>
 <body>
 
     <div id="envelope-wrapper">
-        <div class="envelope-paper">
-            <div class="wax-seal" onclick="revealWedding()">
-                C & G
-            </div>
+        <div class="envelope">
+            <div class="wax-seal" onclick="startExperience()">C & G</div>
         </div>
     </div>
 
-    <iframe id="music" style="display:none" width="0" height="0" src="https://www.youtube.com/embed/vGJTaP6anOU?enablejsapi=1" frameborder="0"></iframe>
+    <iframe id="audio-player" style="display:none" width="0" height="0" src="https://www.youtube.com/embed/vGJTaP6anOU?enablejsapi=1" frameborder="0"></iframe>
 
     <div id="main-site">
-        <div class="hero-image">
+        <div class="hero-painting">
             <div class="bird" style="animation-delay: 0s;"></div>
-            <div class="bird" style="animation-delay: 5s; top: 30%;"></div>
+            <div class="bird" style="animation-delay: 7s; top: 40%;"></div>
         </div>
 
-        <div class="section">
-            <p style="letter-spacing: 5px;">CI SPOSIAMO</p>
+        <div class="countdown-frame">
+            <div class="unit"><span id="days">00</span><label>Giorni</label></div>
+            <div class="unit"><span id="hours">00</span><label>Ore</label></div>
+            <div class="unit"><span id="minutes">00</span><label>Minuti</label></div>
+            <div class="unit"><span id="seconds">00</span><label>Secondi</label></div>
+        </div>
+
+        <div class="container">
+            <p style="letter-spacing: 10px; margin-bottom: 20px;">IL NOSTRO SÌ</p>
             <h1>Chiara & Gregorio</h1>
-            <p>03 Ottobre 2026</p>
-
-            <div class="timer-container">
-                <div class="timer-unit"><span id="d">00</span><label>Giorni</label></div>
-                <div class="timer-unit"><span id="h">00</span><label>Ore</label></div>
-                <div class="timer-unit"><span id="m">00</span><label>Minuti</label></div>
-                <div class="timer-unit"><span id="s">00</span><label>Secondi</label></div>
-            </div>
+            <p style="font-style: italic; font-size: 1.3rem; margin-top: 20px;">03 Ottobre 2026</p>
         </div>
 
-        <div class="section" style="background: white;">
+        <div class="container" style="background: white;">
             <h2>La Cerimonia</h2>
             <p>Chiesa Parrocchiale dei Santi Gervasio e Protasio Martiri</p>
             <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Piazza+Armando+Diaz+1+Santrovaso" target="_blank" class="map-link">Apri su Google Maps</a>
+            <a href="https://maps.app.goo.gl/uX3L5t2t2qH8Z8Z8" target="_blank" class="btn-maps">VISUALIZZA MAPPA</a>
             
-            <hr style="margin: 50px 0; border: 0; border-top: 1px solid #eee;">
+            <div style="height: 80px;"></div>
 
             <h2>Il Ricevimento</h2>
             <p>Villa Luppis</p>
             <p>Via San Martino, 34 - 33087 Pasiano di Pordenone (PN)</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Villa+Luppis+Pasiano+di+Pordenone" target="_blank" class="map-link">Apri su Google Maps</a>
+            <a href="https://maps.app.goo.gl/z9mB1p2p2p2p2p2" target="_blank" class="btn-maps">VISUALIZZA MAPPA</a>
         </div>
 
-        <div class="section">
-            <div class="gift-box">
-                <h3 style="font-family: 'Cormorant Garamond';">Un Pensiero per noi</h3>
-                <p>La vostra presenza è il regalo più bello. Se desiderate contribuire al nostro sogno:</p>
-                <p style="font-weight: bold; letter-spacing: 1px;">IBAN: IT 00 X 00000 00000 000000000000</p>
+        <div class="container">
+            <div class="iban-section">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Un Pensiero per noi</h3>
+                <p>La vostra presenza è il dono più grande. Se desiderate contribuire al nostro viaggio di nozze:</p>
+                <p style="font-weight: bold; font-size: 1.1rem; color: var(--salvia); letter-spacing: 1px;">IBAN: IT 00 X 00000 00000 000000000000</p>
                 <p>Intestato a Chiara Vincenzi e Gregorio Tronchin</p>
             </div>
 
-            <div id="rsvp-area">
-                <h2>R.S.V.P.</h2>
-                <input type="text" id="name" placeholder="Nome e Cognome" style="width:100%; padding:15px; margin:10px 0; border:1px solid #ddd;"><br>
-                <button onclick="alert('Grazie! Ricevuto con amore.')">Conferma Presenza</button>
+            <div id="rsvp-form">
+                <h2 style="color: var(--arancio);">R.S.V.P.</h2>
+                <p>Confermate con gioia entro il 30 Agosto 2026</p>
+                <div style="max-width: 500px; margin: 30px auto;">
+                    <input type="text" placeholder="Nome e Cognome" style="width:100%; padding:15px; border:1px solid #ddd; margin-bottom:15px;">
+                    <button onclick="alert('Conferma inviata con successo!')" style="width:100%; background: var(--salvia); color: white; border: none; padding: 15px; cursor: pointer; letter-spacing: 2px;">INVIA CONFERMA</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        function revealWedding() {
+        function startExperience() {
+            // Nasconde busta e mostra sito
             document.getElementById('envelope-wrapper').style.transform = 'translateY(-100%)';
             const main = document.getElementById('main-site');
             main.style.display = 'block';
             setTimeout(() => main.style.opacity = '1', 100);
             
-            // Start Music (Simulata via YouTube API o file locale se disponibile)
-            // Nota: L'autostart della musica è limitato dai browser, serve il clic sulla ceralacca.
-            
-            startCountdown();
+            // Avvio timer e petali
+            startTimer();
             createPetals();
         }
 
-        function startCountdown() {
+        function startTimer() {
             const target = new Date("October 3, 2026 11:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
                 const d = target - now;
-                document.getElementById('d').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-                document.getElementById('h').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('m').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('s').innerText = Math.floor((d % (1000 * 60)) / 1000);
+                document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('minutes').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('seconds').innerText = Math.floor((d % (1000 * 60)) / 1000);
             }, 1000);
         }
 
         function createPetals() {
-            for(let i=0; i<25; i++) {
+            for(let i=0; i<35; i++) {
                 let p = document.createElement("div");
                 p.className = "petal";
                 p.style.left = Math.random() * 100 + "vw";
-                p.style.width = Math.random() * 15 + 10 + "px";
-                p.style.height = p.style.width;
-                p.style.animationDuration = Math.random() * 5 + 5 + "s";
-                p.style.animationDelay = Math.random() * 10 + "s";
+                p.style.animationDuration = (Math.random() * 4 + 6) + "s";
+                p.style.animationDelay = Math.random() * 8 + "s";
+                p.style.opacity = Math.random();
                 document.body.appendChild(p);
             }
         }
