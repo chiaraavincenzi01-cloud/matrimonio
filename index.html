@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chiara & Gregorio | Wedding</title>
+    <title>Chiara & Gregorio | Wedding Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
     
     <style>
@@ -11,113 +11,131 @@
             --salvia: #9db2a2;
             --perla: #fdfcf9;
             --arancio: #f4b084;
+            --testo: #4a4a4a;
         }
 
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--perla); font-family: 'Montserrat', sans-serif; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--perla); font-family: 'Montserrat', sans-serif; color: var(--testo); overflow-x: hidden; }
 
-        /* --- BUSTA BLOCCATA IN PRIMO PIANO --- */
+        /* --- BUSTA LUXURY --- */
         #copertura-busta {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #e2dfd5; z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            cursor: pointer;
+            background: #e2dfd5; z-index: 9999; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        .busta-grafica {
-            position: relative; width: 90%; max-width: 500px; height: 300px;
-            background: white; border: 1px solid #ddd; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        .envelope {
+            position: relative; width: 90%; max-width: 550px; height: 350px;
+            background: white; box-shadow: 0 40px 100px rgba(0,0,0,0.15);
+        }
+
+        .envelope::before {
+            content: ""; position: absolute; top: 0; width: 0; height: 0;
+            border-top: 180px solid #f9f7f2; border-left: 275px solid transparent; border-right: 275px solid transparent;
+            z-index: 2; left: 0;
         }
 
         .sigillo {
-            position: absolute; top: 110px; left: 50%; transform: translateX(-50%);
-            width: 80px; height: 80px; background: var(--arancio);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-family: 'Cormorant Garamond'; font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 10;
+            position: absolute; top: 150px; left: 50%; transform: translateX(-50%);
+            width: 85px; height: 85px; background: var(--arancio);
+            border-radius: 50%; z-index: 10; display: flex; align-items: center; justify-content: center;
+            color: white; font-family: 'Cormorant Garamond'; font-size: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
+        .sigillo::after { content: "🌿"; position: absolute; bottom: -10px; font-size: 1.6rem; }
 
-        /* --- CONTENUTO DEL SITO (Invisibile all'inizio) --- */
-        #sito-reale { display: none; text-align: center; }
+        /* --- SITO REALE --- */
+        #sito-reale { display: none; opacity: 0; transition: opacity 2s; text-align: center; }
 
-        .hero-villa {
-            width: 100%; height: 80vh;
+        .hero {
+            width: 100%; height: 100vh;
             background: url('a.jpg.jpeg') no-repeat center center;
             background-size: cover; display: flex; align-items: flex-end; justify-content: center;
+            border-bottom: 10px solid white;
         }
 
         .hero-overlay {
-            background: rgba(255, 255, 255, 0.9); padding: 40px;
-            width: 80%; max-width: 600px; border: 1px solid var(--salvia); margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px);
+            padding: 40px; width: 80%; max-width: 600px; border: 1px solid var(--salvia); margin-bottom: 50px;
         }
 
-        .sezione { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
         h1, h2 { font-family: 'Cormorant Garamond'; color: var(--salvia); margin: 0; }
-        h1 { font-size: 3rem; }
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; margin-bottom: 20px; }
 
-        .bottone-mappa {
-            display: inline-block; padding: 15px 30px; background: var(--arancio);
-            color: white; text-decoration: none; margin-top: 15px; font-weight: bold;
+        .sezione { padding: 80px 20px; max-width: 850px; margin: 0 auto; }
+        
+        .btn-mappa {
+            display: inline-block; padding: 15px 35px; background: var(--arancio);
+            color: white; text-decoration: none; margin-top: 20px; letter-spacing: 2px;
+            font-size: 0.8rem; border-radius: 2px; transition: 0.3s;
         }
+        .btn-mappa:hover { background: #e09b6e; letter-spacing: 4px; }
 
-        #youtube-invisibile { position: absolute; top: -9999px; left: -9999px; }
+        .iban-box {
+            background: #f4f6f4; border: 1px dashed var(--salvia);
+            padding: 40px; margin: 40px auto; max-width: 550px;
+        }
     </style>
 </head>
 <body>
 
-    <div id="copertura-busta" onclick="apriSito()">
-        <div class="busta-grafica">
+    <div id="copertura-busta" onclick="apriMatrimonio()">
+        <div class="envelope">
             <div class="sigillo">C & G</div>
-            <p style="position:absolute; bottom:20px; width:100%; text-align:center; color:#999; font-size:0.8rem;">Clicca per aprire</p>
+            <p style="position:absolute; bottom:20px; width:100%; text-align:center; color:#aaa; font-size:0.7rem; letter-spacing:2px;">CLICCA PER APRIRE</p>
         </div>
     </div>
 
-    <div id="youtube-invisibile">
-        <iframe id="player-audio" width="100" height="100" 
-            src="https://www.youtube.com/embed/vGJTaP6anOU?enablejsapi=1" 
-            frameborder="0">
-        </iframe>
-    </div>
+    <audio id="audioNozze" loop preload="auto">
+        <source src="alex-productions-romantic-music-for-weddings-and-valentines-day-love(chosic.com).mp3" type="audio/mpeg">
+    </audio>
 
     <div id="sito-reale">
-        <div class="hero-villa">
+        <div class="hero">
             <div class="hero-overlay">
+                <p style="letter-spacing: 8px; font-size: 0.8rem;">SAVE THE DATE</p>
                 <h1>Chiara & Gregorio</h1>
-                <p>03 OTTOBRE 2026</p>
+                <p style="margin-top: 10px;">03 OTTOBRE 2026</p>
             </div>
         </div>
 
         <div class="sezione">
             <h2>La Cerimonia</h2>
             <p>Chiesa Parrocchiale dei Santi Gervasio e Protasio Martiri</p>
-            <p>Santrovaso di Preganziol (TV)</p>
-            <a href="https://maps.app.goo.gl/4XW9pXFpL9U2" target="_blank" class="bottone-mappa">VEDI MAPPA</a>
+            <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
+            <a href="https://maps.google.com/?q=Piazza+Armando+Diaz+1+Preganziol" target="_blank" class="btn-mappa">APRI MAPPA</a>
         </div>
 
-        <div class="sezione" style="background: #fdfcf9;">
+        <div class="sezione">
             <h2>Il Ricevimento</h2>
             <p>Villa Luppis</p>
-            <p>Pasiano di Pordenone (PN)</p>
-            <a href="https://maps.app.goo.gl/7Y5p9" target="_blank" class="bottone-mappa">VEDI MAPPA</a>
+            <p>Via San Martino, 34 - 33087 Pasiano di Pordenone (PN)</p>
+            <a href="https://maps.google.com/?q=Villa+Luppis+Pasiano+di+Pordenone" target="_blank" class="btn-mappa">APRI MAPPA</a>
         </div>
 
-        <div class="sezione" style="background: #f4f6f4; border: 1px dashed var(--salvia);">
-            <h2>Un Pensiero per noi</h2>
-            <p>IBAN: IT 00 X 00000 00000 000000000000</p>
+        <div class="iban-box">
+            <h3>Un pensiero per noi</h3>
+            <p>La vostra presenza è il dono più bello.</p>
+            <p style="font-weight: bold; font-size: 1.1rem; color: var(--salvia); margin-top: 15px;">IBAN: IT 00 X 00000 00000 000000000000</p>
             <p>Intestato a Chiara e Gregorio</p>
         </div>
     </div>
 
     <script>
-        function apriSito() {
-            // 1. ELIMINA LA BUSTA
-            document.getElementById('copertura-busta').style.display = 'none';
+        function apriMatrimonio() {
+            // 1. Fai scivolare via la busta verso l'alto
+            document.getElementById('copertura-busta').style.transform = 'translateY(-100%)';
             
-            // 2. MOSTRA IL SITO
+            // 2. Fai partire la musica romantica
+            var audio = document.getElementById('audioNozze');
+            audio.play().catch(function(error) {
+                console.log("Audio bloccato: serve un'azione dell'utente");
+            });
+
+            // 3. Mostra il sito con dissolvenza
             document.getElementById('sito-reale').style.display = 'block';
-            
-            // 3. FAI PARTIRE LA MUSICA
-            var iframe = document.getElementById('player-audio');
-            iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            setTimeout(function() {
+                document.getElementById('sito-reale').style.opacity = '1';
+            }, 100);
         }
     </script>
 
