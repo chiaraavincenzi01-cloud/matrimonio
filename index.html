@@ -1,338 +1,668 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Chiara & Gregorio | 03.10.2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400&family=Montserrat:wght@100;300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --salvia: #9db2a2;
-            --salvia-deep: #7a8f80;
-            --perla: #fdfcf9;
-            --arancio-pastello: #f4b084;
-            --oro-ghirigori: rgba(212, 175, 55, 0.2);
-            --testo: #4a4a4a;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chiara & Gregorio | 03.10.2026</title>
 
-        body, html { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: var(--perla); font-family: 'Cormorant Garamond', serif; 
-            color: var(--testo); overflow-x: hidden; 
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@200;300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 
-        /* --- SISTEMA BUSTA REGALE --- */
-        #busta-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #e5e2d9; z-index: 10000; display: flex; 
-            justify-content: center; align-items: center;
-            transition: all 1.5s cubic-bezier(0.7, 0, 0.3, 1);
-            perspective: 1500px;
-        }
+<style>
 
-        .envelope { 
-            position: relative; width: 100%; height: 100%; 
-            background: #f9f7f2; overflow: hidden; 
-        }
+/* ---------------------- */
+/* COLOR PALETTE */
+/* ---------------------- */
 
-        /* 4 Lembi della busta */
-        .flap { 
-            position: absolute; width: 100%; height: 100%; 
-            background: #fdfcf9; transition: all 1.2s ease-in-out; 
-            z-index: 5; box-shadow: inset 0 0 50px rgba(0,0,0,0.02); 
-        }
-        
-        .flap.top { 
-            top: 0; left: 0; height: 50%; 
-            clip-path: polygon(0 0, 100% 0, 50% 100%); 
-            transform-origin: top; z-index: 8; 
-            border-bottom: 1px solid rgba(0,0,0,0.05); 
-        }
-        .flap.bottom { 
-            bottom: 0; left: 0; height: 50%; 
-            clip-path: polygon(0 100%, 100% 100%, 50% 0); z-index: 7; 
-        }
-        .flap.left { 
-            top: 0; left: 0; width: 50%; 
-            clip-path: polygon(0 0, 0 100%, 100% 50%); z-index: 6; 
-            background: #f4f2eb; 
-        }
-        .flap.right { 
-            top: 0; right: 0; width: 50%; 
-            clip-path: polygon(100% 0, 100% 100%, 0 50%); z-index: 6; 
-            background: #f4f2eb; 
-        }
+:root{
+--perla:#fdfcf9;
+--salvia:#9db2a2;
+--salvia-deep:#7a8f80;
+--arancio:#f4b084;
+--oro:rgba(212,175,55,0.2);
+--text:#2e2e2e;
+}
 
-        /* Ceralacca Arancio Pastello con Ulivo */
-        .wax-seal {
-            position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%);
-            z-index: 20; cursor: pointer; width: 120px; height: 120px;
-            background: var(--arancio-pastello); border-radius: 54% 46% 62% 38% / 41% 59% 41% 59%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2), inset -3px -3px 8px rgba(0,0,0,0.3);
-            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .wax-seal:hover { transform: translate(-50%, -50%) scale(1.1); }
-        .wax-seal::after { 
-            content: "🌿"; position: absolute; top: -15px; right: -5px; 
-            font-size: 2.5rem; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
-        }
-        .wax-seal span { 
-            font-size: 1.8rem; color: white; font-weight: bold; 
-            font-family: 'Cormorant Garamond'; letter-spacing: 2px; 
-        }
+/* ---------------------- */
+/* GLOBAL */
+/* ---------------------- */
 
-        /* Apertura */
-        .aperta .flap.top { transform: rotateX(110deg); opacity: 0; }
-        .aperta .flap.bottom { transform: rotateX(-110deg); opacity: 0; }
-        .aperta .flap.left { transform: translateX(-100%); opacity: 0; }
-        .aperta .flap.right { transform: translateX(100%); opacity: 0; }
-        .aperta .wax-seal { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-        .aperta#busta-container { transform: scale(1.1) translateY(-100%); opacity: 0; pointer-events: none; }
+*{box-sizing:border-box}
 
-        /* --- CONTENUTO SITO --- */
-        #sito-reale { display: none; opacity: 0; transition: opacity 2s ease; }
-        
-        /* Hero: Effetto Vedo-non-Vedo */
-        .hero { 
-            height: 85vh; width: 100%; display: flex; 
-            align-items: center; justify-content: center; 
-            position: relative; background: white; text-align: center; 
-        }
-        .hero-img { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: url('a.jpg.jpeg') center/cover no-repeat; 
-            opacity: 0.35; z-index: 1; 
-        }
-        .hero-text { z-index: 2; padding: 20px; }
-        .hero-text p.top-txt { 
-            font-family: 'Montserrat'; letter-spacing: 6px; 
-            font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; 
-        }
-        .hero-text h1 { 
-            font-family: 'Pinyon Script', cursive; font-size: 5.5rem; 
-            color: var(--salvia-deep); margin: 15px 0; 
-        }
-        .hero-text .data { 
-            font-size: 1.6rem; letter-spacing: 5px; font-weight: 300; 
-        }
+body{
+margin:0;
+background:var(--perla);
+font-family:'Montserrat',sans-serif;
+font-weight:300;
+color:var(--text);
+overflow-x:hidden;
+}
 
-        /* Countdown Dedicato (Sotto l'immagine) */
-        .section-countdown { padding: 60px 20px; text-align: center; background: var(--perla); }
-        .countdown-box { 
-            background: var(--salvia); border: 1px solid var(--arancio-pastello);
-            max-width: 650px; margin: 0 auto; padding: 40px 10px;
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
-        .count-item span { 
-            display: block; font-size: 3.2rem; color: var(--arancio-pastello); 
-            font-weight: 300; line-height: 1;
-        }
-        .count-item label { 
-            font-family: 'Montserrat'; font-size: 0.65rem; color: white; 
-            text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; display: block;
-        }
+h1,h2,h3{
+font-family:'Cormorant Garamond',serif;
+font-weight:400;
+margin:0;
+}
 
-        /* Galleria Scorrevole con Ghirigori Oro */
-        .section-gallery { 
-            background: var(--arancio-pastello); padding: 100px 0; overflow: hidden;
-            background-image: url("https://www.transparenttextures.com/patterns/floral-paper.png"); 
-            position: relative;
-        }
-        .gallery-title { 
-            font-family: 'Pinyon Script', cursive; font-size: 4.5rem; 
-            color: white; text-align: center; margin-bottom: 50px; 
-        }
-        .slider-track { 
-            display: flex; width: calc(300px * 10); 
-            animation: scroll 40s linear infinite; 
-        }
-        .slide { 
-            width: 260px; height: 360px; margin: 0 20px; 
-            border: 12px solid white; box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
-            flex-shrink: 0; transform: rotate(-1deg);
-        }
-        .slide:nth-child(even) { transform: rotate(2deg); }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-300px * 5)); } }
+section{
+padding:90px 20px;
+}
 
-        /* Sezioni Info Mappe */
-        .section-info { padding: 100px 20px; max-width: 900px; margin: 0 auto; text-align: center; }
-        .section-info h2 { font-size: 3rem; color: var(--salvia-deep); font-weight: 300; margin-bottom: 20px; }
-        .map-box { height: 450px; margin: 35px 0; border: 12px solid white; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+/* ---------------------- */
+/* ENVELOPE INTRO */
+/* ---------------------- */
 
-        /* IBAN Regale */
-        .iban-card { 
-            border: 1px dashed var(--arancio-pastello); padding: 50px; 
-            background: white; margin: 60px 0; border-radius: 4px;
-        }
-        .iban-txt { font-size: 1.4rem; color: var(--salvia-deep); letter-spacing: 2px; margin: 20px 0; font-weight: 500; }
+#busta-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#e8e6df;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+perspective:2000px;
+}
 
-        /* RSVP */
-        .rsvp-container { 
-            background: #f9fbf9; border: 1px solid var(--salvia); 
-            padding: 70px 40px; max-width: 650px; margin: 80px auto; text-align: left; 
-        }
-        .rsvp-container label { 
-            font-family: 'Montserrat'; font-size: 0.75rem; font-weight: 600; 
-            color: var(--salvia-deep); display: block; margin-bottom: 8px; letter-spacing: 1px;
-        }
-        .rsvp-container input, .rsvp-container textarea { 
-            width: 100%; border: none; border-bottom: 1px solid #ccc; 
-            padding: 12px 0; margin-bottom: 35px; background: transparent;
-            font-family: 'Cormorant Garamond'; font-size: 1.3rem; outline: none; transition: 0.3s;
-        }
-        .rsvp-container input:focus { border-bottom: 1px solid var(--arancio-pastello); }
-        .btn-regal { 
-            background: var(--salvia-deep); color: white; border: none; 
-            padding: 22px; width: 100%; font-family: 'Montserrat'; 
-            letter-spacing: 4px; cursor: pointer; font-weight: 600; transition: 0.4s;
-        }
-        .btn-regal:hover { background: var(--salvia); letter-spacing: 6px; }
+.envelope{
+width:100%;
+height:100%;
+position:relative;
+background:#f7f5ee;
+overflow:hidden;
+}
 
-    </style>
+/* flaps */
+
+.flap{
+position:absolute;
+width:100%;
+height:100%;
+background:#fdfcf9;
+box-shadow:inset 0 0 40px rgba(0,0,0,0.05);
+transition:all 1s cubic-bezier(.6,-0.28,.735,.045);
+}
+
+.flap.top{
+height:50%;
+clip-path:polygon(0 0,100% 0,50% 100%);
+transform-origin:top;
+z-index:4;
+border-bottom:1px solid rgba(0,0,0,0.05);
+}
+
+.flap.bottom{
+bottom:0;
+height:50%;
+clip-path:polygon(0 100%,100% 100%,50% 0);
+z-index:3;
+}
+
+.flap.left{
+width:50%;
+clip-path:polygon(0 0,0 100%,100% 50%);
+background:#f4f2eb;
+z-index:2;
+}
+
+.flap.right{
+right:0;
+width:50%;
+clip-path:polygon(100% 0,100% 100%,0 50%);
+background:#f4f2eb;
+z-index:2;
+}
+
+/* wax seal */
+
+.wax{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:120px;
+height:120px;
+background:var(--arancio);
+border-radius:55% 45% 60% 40%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+box-shadow:
+0 10px 25px rgba(0,0,0,0.25),
+inset -4px -4px 10px rgba(0,0,0,0.3);
+transition:.5s;
+z-index:10;
+}
+
+.wax:hover{
+transform:translate(-50%,-50%) scale(1.08);
+}
+
+.wax span{
+color:white;
+font-size:2rem;
+font-family:'Cormorant Garamond';
+letter-spacing:3px;
+}
+
+.wax:after{
+content:"🌿";
+position:absolute;
+top:-18px;
+right:-6px;
+font-size:2.2rem;
+}
+
+/* open animation */
+
+.aperta .top{transform:rotateX(110deg);opacity:0}
+.aperta .bottom{transform:rotateX(-110deg);opacity:0}
+.aperta .left{transform:translateX(-120%);opacity:0}
+.aperta .right{transform:translateX(120%);opacity:0}
+
+.aperta .wax{
+transform:translate(-50%,-50%) scale(0);
+opacity:0;
+}
+
+.aperta{
+pointer-events:none;
+transition:all 1.2s ease;
+opacity:0;
+transform:scale(1.05) translateY(-100%);
+}
+
+/* ---------------------- */
+/* HERO */
+/* ---------------------- */
+
+.hero{
+height:85vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+background:white;
+}
+
+.hero-img{
+position:absolute;
+width:100%;
+height:100%;
+background:url('a.jpg.jpeg') center/cover no-repeat;
+opacity:.35;
+}
+
+.hero-text{
+z-index:2;
+padding:20px;
+}
+
+.hero-text p{
+letter-spacing:6px;
+font-size:.8rem;
+text-transform:uppercase;
+}
+
+.hero-text h1{
+font-family:'Pinyon Script';
+font-size:5rem;
+color:var(--salvia-deep);
+margin:20px 0;
+}
+
+.hero-text .data{
+font-size:1.4rem;
+letter-spacing:6px;
+}
+
+/* ---------------------- */
+/* COUNTDOWN */
+/* ---------------------- */
+
+.count-section{
+background:var(--perla);
+text-align:center;
+}
+
+.count-title{
+letter-spacing:4px;
+text-transform:uppercase;
+font-size:.9rem;
+margin-bottom:40px;
+}
+
+.count-box{
+background:var(--salvia);
+border:1px solid var(--arancio);
+max-width:650px;
+margin:auto;
+padding:35px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
+
+.count span{
+display:block;
+font-size:3rem;
+color:var(--arancio);
+}
+
+.count label{
+color:white;
+font-size:.65rem;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+/* ---------------------- */
+/* GALLERY */
+/* ---------------------- */
+
+.gallery{
+background:var(--arancio);
+background-image:url("https://www.transparenttextures.com/patterns/floral-paper.png");
+overflow:hidden;
+}
+
+.gallery h2{
+text-align:center;
+font-family:'Pinyon Script';
+font-size:4rem;
+color:white;
+margin-bottom:60px;
+}
+
+.slider{
+display:flex;
+gap:40px;
+width:max-content;
+animation:scroll 40s linear infinite;
+}
+
+.slider:hover{
+animation-play-state:paused;
+}
+
+.polaroid{
+width:260px;
+height:360px;
+background:white;
+padding:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+transform:rotate(-2deg);
+}
+
+.polaroid:nth-child(even){
+transform:rotate(2deg);
+}
+
+.polaroid img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+@keyframes scroll{
+from{transform:translateX(0)}
+to{transform:translateX(-50%)}
+}
+
+/* ---------------------- */
+/* INFO SECTIONS */
+/* ---------------------- */
+
+.info{
+max-width:900px;
+margin:auto;
+text-align:center;
+}
+
+.info h2{
+font-size:2.8rem;
+color:var(--salvia-deep);
+margin-bottom:20px;
+}
+
+.map{
+height:420px;
+margin:40px 0;
+border:10px solid white;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* ---------------------- */
+/* IBAN */
+/* ---------------------- */
+
+.iban{
+border:2px dashed var(--arancio);
+padding:50px;
+background:white;
+margin-top:60px;
+}
+
+.iban h3{
+font-size:2rem;
+margin-bottom:20px;
+}
+
+.iban-code{
+font-size:1.4rem;
+letter-spacing:3px;
+color:var(--salvia-deep);
+margin:20px 0;
+}
+
+/* ---------------------- */
+/* RSVP */
+/* ---------------------- */
+
+.rsvp{
+border:1px solid var(--salvia);
+padding:60px 40px;
+margin-top:80px;
+background:#f9fbf9;
+}
+
+.rsvp h2{
+font-size:2.5rem;
+text-align:center;
+margin-bottom:10px;
+}
+
+.rsvp p{
+text-align:center;
+font-style:italic;
+margin-bottom:40px;
+}
+
+.rsvp label{
+font-size:.7rem;
+letter-spacing:1px;
+text-transform:uppercase;
+display:block;
+margin-bottom:8px;
+}
+
+.rsvp input,
+.rsvp textarea{
+width:100%;
+border:none;
+border-bottom:1px solid #ccc;
+padding:12px 0;
+margin-bottom:30px;
+background:transparent;
+font-size:1.1rem;
+}
+
+.rsvp input:focus,
+.rsvp textarea:focus{
+outline:none;
+border-bottom:1px solid var(--arancio);
+}
+
+.btn{
+background:var(--salvia-deep);
+color:white;
+border:none;
+padding:20px;
+width:100%;
+letter-spacing:4px;
+cursor:pointer;
+}
+
+.btn:hover{
+background:var(--salvia);
+letter-spacing:6px;
+}
+
+/* ---------------------- */
+/* MOBILE */
+/* ---------------------- */
+
+@media(max-width:700px){
+
+.hero-text h1{
+font-size:3.5rem;
+}
+
+.count-box{
+grid-template-columns:repeat(2,1fr);
+row-gap:25px;
+}
+
+.gallery h2{
+font-size:3rem;
+}
+
+.polaroid{
+width:200px;
+height:280px;
+}
+
+}
+
+</style>
 </head>
+
 <body>
 
-    <div id="busta-container" onclick="apriMatrimonio()">
-        <div class="envelope">
-            <div class="flap top"></div>
-            <div class="flap bottom"></div>
-            <div class="flap left"></div>
-            <div class="flap right"></div>
-            <div class="wax-seal"><span>C & G</span></div>
-        </div>
-    </div>
+<!-- BUSTA -->
 
-    <audio id="audioNozze" loop>
-        <source src="alex-productions-romantic-music-for-weddings-and-valentines-day-love(chosic.com).mp3" type="audio/mpeg">
-    </audio>
+<div id="busta-container">
 
-    <div id="sito-reale">
-        <section class="hero">
-            <div class="hero-img"></div>
-            <div class="hero-text">
-                <p class="top-txt">BENVENUTI<br>sul sito del nostro matrimonio</p>
-                <h1>Chiara & Gregorio</h1>
-                <p class="data">03 . 10 . 2026</p>
-            </div>
-        </section>
+<div class="envelope">
 
-        <section class="section-countdown">
-            <h3 style="font-weight: 300; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 35px; font-size: 1rem;">Il sogno ha inizio tra:</h3>
-            <div class="countdown-box">
-                <div class="count-item"><span id="days">00</span><label>Giorni</label></div>
-                <div class="count-item"><span id="hours">00</span><label>Ore</label></div>
-                <div class="count-item"><span id="minutes">00</span><label>Minuti</label></div>
-                <div class="count-item"><span id="seconds">00</span><label>Secondi</label></div>
-            </div>
-        </section>
+<div class="flap top"></div>
+<div class="flap bottom"></div>
+<div class="flap left"></div>
+<div class="flap right"></div>
 
-        <section class="section-gallery">
-            <h2 class="gallery-title">Momenti Insieme</h2>
-            <div class="slider-track">
-                <div class="slide"><img src="foto1.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto2.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto3.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto4.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto5.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto1.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto2.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto3.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto4.jpg" alt="Noi"></div>
-                <div class="slide"><img src="foto5.jpg" alt="Noi"></div>
-            </div>
-        </section>
+<div class="wax" onclick="openInvite()">
+<span>C & G</span>
+</div>
 
-        <section class="section-info">
-            <h2>La Cerimonia</h2>
-            <p style="font-size: 1.2rem;">Ore 11:00</p>
-            <p>Chiesa dei Santi Gervasio e Protasio Martiri</p>
-            <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
-            <div class="map-box">
-                <iframe width="100%" height="100%" frameborder="0" style="border:0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.076356064132!2d12.2359419!3d45.6023246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477936109312b6f1%3A0xc66578051a66099b!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Preganziol%20TV!5e0!3m2!1sit!2sit!4v1700000000000"></iframe>
-            </div>
+</div>
+</div>
 
-            <h2 style="margin-top: 100px;">Il Ricevimento</h2>
-            <p style="font-size: 1.2rem;">Dalle ore 13:00</p>
-            <p>Villa Luppis</p>
-            <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
-            <div class="map-box">
-                <iframe width="100%" height="100%" frameborder="0" style="border:0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.6346881267423!2d12.6179339!3d45.8506169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796f7c70e34b1d%3A0x600b4679786a3d60!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1700000000001"></iframe>
-            </div>
+<audio id="music" loop>
+<source src="alex-productions-romantic-music-for-weddings-and-valentines-day-love(chosic.com).mp3">
+</audio>
 
-            <div class="iban-card">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2.2rem; font-weight: 400;">Un Pensiero per noi</h3>
-                <p style="margin: 20px 0; line-height: 1.8;">Per noi il regalo più grande è la vostra presenza,<br>ma se volete contribuire al nostro futuro, di seguito l'IBAN:</p>
-                <p class="iban-txt">IT 00 X 00000 00000 000000000000</p>
-                <p style="font-size: 0.9rem; opacity: 0.8;">Intestato a Chiara Vincenzi e Gregorio Tronchin</p>
-            </div>
+<!-- SITE -->
 
-            <div class="rsvp-container">
-                <h2 style="font-size: 2.8rem; text-align: center; margin-bottom: 40px;">R.S.V.P.</h2>
-                <p style="text-align: center; margin-bottom: 40px; font-style: italic;">Si prega di dare gentile conferma entro il 30 Agosto 2026</p>
-                
-                <label>NOME E COGNOME PARTECIPANTE/I</label>
-                <input type="text" placeholder="Es. Chiara, Gregorio e Famiglia">
-                
-                <label>EVENTUALI INTOLLERANZE O ALLERGIE ALIMENTARI</label>
-                <textarea rows="2" placeholder="Celiachia, intolleranze, menu bambini..."></textarea>
-                
-                <button class="btn-regal" onclick="alert('Grazie! La tua conferma è stata inviata con successo.')">INVIA CONFERMA</button>
-            </div>
-        </section>
+<div id="site" style="display:none;opacity:0;transition:opacity 2s">
 
-        <p style="text-align: center; padding: 100px 0; letter-spacing: 6px; font-size: 0.8rem; opacity: 0.6;">VI ASPETTIAMO CON GIOIA</p>
-    </div>
+<section class="hero">
 
-    <script>
-        function apriMatrimonio() {
-            // Animazione busta
-            document.getElementById('busta-container').classList.add('aperta');
-            
-            // Audio (gestione errore se browser blocca autoplay)
-            const audio = document.getElementById('audioNozze');
-            audio.play().catch(() => console.log("L'utente deve interagire per l'audio."));
+<div class="hero-img"></div>
 
-            // Attivazione sito
-            const sito = document.getElementById('sito-reale');
-            sito.style.display = 'block';
-            setTimeout(() => {
-                sito.style.opacity = '1';
-                startCountdown(); // Avvia il timer vero
-            }, 800);
-        }
+<div class="hero-text">
 
-        function startCountdown() {
-            // Target preciso: 3 Ottobre 2026 alle ore 11:00
-            const target = new Date("October 3, 2026 11:00:00").getTime();
+<p>BENVENUTI<br>sul sito del nostro matrimonio</p>
 
-            const timer = setInterval(function() {
-                const ora = new Date().getTime();
-                const distanza = target - ora;
+<h1>Chiara & Gregorio</h1>
 
-                if (distanza < 0) {
-                    clearInterval(timer);
-                    document.querySelector(".countdown-box").innerHTML = "<p style='color:white; grid-column: 1/5; font-size: 1.5rem;'>OGGI È IL GRANDE GIORNO!</p>";
-                    return;
-                }
+<p class="data">03 · 10 · 2026</p>
 
-                // Calcoli dinamici
-                const giorni = Math.floor(distanza / (1000 * 60 * 60 * 24));
-                const ore = Math.floor((distanza % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minuti = Math.floor((distanza % (1000 * 60 * 60)) / (1000 * 60));
-                const secondi = Math.floor((distanza % (1000 * 60)) / 1000);
+</div>
 
-                // Aggiornamento DOM con padStart per lo zero iniziale (es. 09 invece di 9)
-                document.getElementById('days').innerText = giorni.toString().padStart(2, '0');
-                document.getElementById('hours').innerText = ore.toString().padStart(2, '0');
-                document.getElementById('minutes').innerText = minuti.toString().padStart(2, '0');
-                document.getElementById('seconds').innerText = secondi.toString().padStart(2, '0');
-            }, 1000);
-        }
-    </script>
+</section>
+
+<section class="count-section">
+
+<div class="count-title">
+Saremo marito e moglie tra:
+</div>
+
+<div class="count-box">
+
+<div class="count">
+<span id="d">00</span>
+<label>Giorni</label>
+</div>
+
+<div class="count">
+<span id="h">00</span>
+<label>Ore</label>
+</div>
+
+<div class="count">
+<span id="m">00</span>
+<label>Minuti</label>
+</div>
+
+<div class="count">
+<span id="s">00</span>
+<label>Secondi</label>
+</div>
+
+</div>
+
+</section>
+
+<section class="gallery">
+
+<h2>Momenti Insieme</h2>
+
+<div class="slider">
+
+<div class="polaroid"><img src="foto1.jpg"></div>
+<div class="polaroid"><img src="foto2.jpg"></div>
+<div class="polaroid"><img src="foto3.jpg"></div>
+<div class="polaroid"><img src="foto4.jpg"></div>
+<div class="polaroid"><img src="foto5.jpg"></div>
+
+<div class="polaroid"><img src="foto1.jpg"></div>
+<div class="polaroid"><img src="foto2.jpg"></div>
+<div class="polaroid"><img src="foto3.jpg"></div>
+<div class="polaroid"><img src="foto4.jpg"></div>
+<div class="polaroid"><img src="foto5.jpg"></div>
+
+</div>
+
+</section>
+
+<section class="info">
+
+<h2>La Cerimonia</h2>
+
+<p>Ore 11:00</p>
+<p>Chiesa dei Santi Gervasio e Protasio Martiri</p>
+<p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
+
+<div class="map">
+
+<iframe width="100%" height="100%" frameborder="0" style="border:0"
+src="https://www.google.com/maps?q=45.6023246,12.2359419&z=15&output=embed"></iframe>
+
+</div>
+
+<h2 style="margin-top:80px">Il Ricevimento</h2>
+
+<p>Dalle ore 13:00</p>
+<p>Villa Luppis</p>
+<p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
+
+<div class="map">
+
+<iframe width="100%" height="100%" frameborder="0" style="border:0"
+src="https://www.google.com/maps?q=Villa+Luppis&output=embed"></iframe>
+
+</div>
+
+<div class="iban">
+
+<h3>Wedding Wishlist</h3>
+
+<p>
+Per noi il regalo più grande è la vostra presenza,
+ma se desiderate sostenere il nostro progetto di vita insieme
+e la costruzione della nostra casa, potete farlo qui:
+</p>
+
+<div class="iban-code">
+IT 00 X 00000 00000 000000000000
+</div>
+
+<p>Intestato a Chiara Vincenzi e Gregorio Tronchin</p>
+
+</div>
+
+<div class="rsvp">
+
+<h2>R.S.V.P.</h2>
+
+<p>Si prega di dare gentile conferma entro il 30 Agosto 2026</p>
+
+<label>NOME E COGNOME PARTECIPANTE/I</label>
+<input type="text">
+
+<label>EVENTUALI INTOLLERANZE O ALLERGIE ALIMENTARI</label>
+<textarea rows="2"></textarea>
+
+<button class="btn" onclick="alert('Grazie per la conferma!')">
+INVIA CONFERMA
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+<script>
+
+/* OPEN ENVELOPE */
+
+function openInvite(){
+
+document.getElementById("busta-container").classList.add("aperta")
+
+const music=document.getElementById("music")
+music.play().catch(()=>{})
+
+const site=document.getElementById("site")
+
+setTimeout(()=>{
+site.style.display="block"
+site.style.opacity="1"
+startCountdown()
+},700)
+
+}
+
+/* COUNTDOWN */
+
+function startCountdown(){
+
+const target=new Date("October 3, 2026 11:00:00").getTime()
+
+setInterval(()=>{
+
+const now=new Date().getTime()
+const diff=target-now
+
+const d=Math.floor(diff/(1000*60*60*24))
+const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60))
+const m=Math.floor((diff%(1000*60*60))/(1000*60))
+const s=Math.floor((diff%(1000*60))/1000)
+
+document.getElementById("d").innerText=d
+document.getElementById("h").innerText=h
+document.getElementById("m").innerText=m
+document.getElementById("s").innerText=s
+
+},1000)
+
+}
+
+</script>
+
 </body>
 </html>
