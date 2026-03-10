@@ -12,6 +12,7 @@
             --salvia-bright: #b1c9b6;
             --salvia-deep: #5d7062;
             --arancio-lux: #f7bd96;
+            --arancio-pastello: #ffeadb;
             --oro-linea: #d4af37;
             --text: #333333;
         }
@@ -58,7 +59,7 @@
         .aperta .wax { transform: translate(-50%, -50%) scale(0); opacity: 0; }
         .aperta#busta-container { visibility: hidden; opacity: 0; transition: 1.5s; pointer-events: none; }
 
-        /* HERO SECTION CON TRANSIZIONE DELICATA */
+        /* HERO SECTION */
         .hero { 
             height: 100vh; 
             display: flex; 
@@ -70,12 +71,12 @@
         }
         .hero-img { 
             position: absolute; 
-            width: 110%; /* Più larga per permettere il movimento */
+            width: 110%; 
             height: 110%; 
             background: url("a.jpg.jpeg") center/cover no-repeat; 
             z-index: 0;
             animation: kenBurns 20s infinite alternate ease-in-out;
-            opacity: 0.85; /* Effetto trasparenza richiesto */
+            opacity: 0.85; 
         }
         
         @keyframes kenBurns {
@@ -86,7 +87,7 @@
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 252, 249, 0.4); /* Velo molto leggero e caldo */
+            background: rgba(255, 252, 249, 0.4); 
             z-index: 1;
         }
         .hero-text { 
@@ -139,9 +140,39 @@
 
         .map-container { height: 400px; margin-top: 30px; border: 1px solid #eee; }
 
-        /* GALLERY */
-        .masonry { column-count: 3; column-gap: 15px; margin-top: 50px; }
-        .masonry img { width: 100%; margin-bottom: 15px; border: 8px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; }
+        /* NUOVA GALLERIA ORIZZONTALE CON SFONDO */
+        .section-gallery {
+            background-color: var(--arancio-pastello);
+            background-image: url('https://www.transparenttextures.com/patterns/leaf.png'); /* Pattern foglie */
+            position: relative;
+            overflow: hidden;
+        }
+        /* Decorazioni floreali simulate */
+        .section-gallery::before, .section-gallery::after {
+            content: "✿"; font-size: 2rem; color: white; position: absolute; opacity: 0.6;
+        }
+        .section-gallery::before { top: 20px; left: 20px; }
+        .section-gallery::after { bottom: 20px; right: 20px; }
+
+        .gallery-wrapper {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Nasconde scrollbar Firefox */
+        }
+        .gallery-wrapper::-webkit-scrollbar { display: none; } /* Nasconde scrollbar Chrome/Safari */
+
+        .gallery-wrapper img {
+            height: 400px;
+            width: auto;
+            flex-shrink: 0;
+            scroll-snap-align: center;
+            border: 10px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 2px;
+        }
 
         /* STORIA */
         .section-storia { background: rgba(247, 189, 150, 0.1); line-height: 1.8; }
@@ -155,10 +186,15 @@
         }
         .btn-lux:hover { background: var(--arancio-lux); }
 
+        /* FAQ */
+        .faq-item { text-align: left; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .faq-item h3 { font-family: 'Cormorant Garamond'; font-size: 1.6rem; color: var(--salvia-deep); margin-bottom: 10px; }
+        .faq-item p { font-size: 0.95rem; line-height: 1.6; }
+
         @media (max-width: 768px) {
             .hero-text h1 { font-size: 3.5rem; }
             .count-grid { grid-template-columns: repeat(2, 1fr); }
-            .masonry { column-count: 2; }
+            .gallery-wrapper img { height: 300px; }
         }
     </style>
 </head>
@@ -216,7 +252,7 @@
                 <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.2223456789!2d12.2355!3d45.6028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4779354000000001%3A0x0!2zNDXCsDM2JzEwLjAiTiAxMsKwMTQnMDAuMCJF!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.1362804535355!2d12.235558476831687!3d45.70823531713583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47793666f22e7029%3A0x7d6f5f9e8316168e!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Santrovaso%20TV!5e0!3m2!1sit!2sit!4v1710000000000" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -231,17 +267,18 @@
                 <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2785.454238714041!2d12.617467612269553!3d45.8222409740523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796395b2737609%3A0xc02388e6e5e8e88e!2sVia%20S.%20Martino%2C%2034%2C%2033087%20Pasiano%20di%20Pordenone%20PN!5e0!3m2!1sit!2sit!4v1709123456789" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2782.4936087968593!2d12.616654876834947!3d45.881432472251345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796395b0908855%3A0x5e0f7601d3656363!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1710000000001" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <section>
+    <section class="section-gallery">
         <div class="container">
             <h2>Sorrisi e smorfie</h2>
             <div class="linea-oro"></div>
-            <div class="masonry">
+            <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px;">(Scorri lateralmente per vedere le foto)</p>
+            <div class="gallery-wrapper">
                 <img src="IMG_0135.jpg"> <img src="IMG_2879.jpg"> <img src="IMG_4458.jpg">
                 <img src="IMG_4701.jpg"> <img src="IMG_9049.jpg"> <img src="foto6.jpg">
                 <img src="foto7.jpg"> <img src="foto8.jpg">
@@ -272,6 +309,33 @@
                     <input type="text" placeholder="Nome e Cognome" style="width: 100%; padding: 12px; margin-bottom: 20px; border: none; border-bottom: 2px solid var(--arancio-lux);">
                     <textarea rows="2" placeholder="Scrivi qui se hai allergie, intolleranze, o note particolari" style="width: 100%; padding: 12px; margin-bottom: 20px; border: none; border-bottom: 2px solid var(--arancio-lux); background: transparent;"></textarea>
                     <button class="btn-lux" onclick="alert('Grazie! Conferma inviata.')">Invia Conferma</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-perla">
+        <div class="container">
+            <div class="info-card">
+                <h2>Domande Frequenti</h2>
+                <div class="linea-oro"></div>
+                <div style="max-width: 800px; margin: 40px auto;">
+                    
+                    <div class="faq-item">
+                        <h3>Posso portare un accompagnatore?</h3>
+                        <p>Se ti fa piacere essere accompagnato, indicalo nella sezione delle note quando registri la tua presenza. Saremo noi sposi a contattarti personalmente per confermarti la presenza del tuo +1.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>C'è parcheggio disponibile?</h3>
+                        <p>Certamente, la chiesa e la villa dispongono di un ampio parcheggio, non ti preoccupare!</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Che dress code devo seguire?</h3>
+                        <p>Elegante e formale. Evita il colore bianco, riservato alla sposa, e il colore arancione, riservato alle testimoni.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
