@@ -58,48 +58,58 @@
             text-align: center;
         }
 
-        /* SEZIONI */
+        /* BANNER BENVENUTO ARANCIO */
+        .welcome-note { background: linear-gradient(to right, var(--perla), var(--arancio-seta), var(--perla)); color: var(--salvia-deep); padding: 60px 20px; text-align: center; font-family: 'Cormorant Garamond'; font-size: 1.8rem; letter-spacing: 2px; font-style: italic; }
+
+        /* SEZIONI E SFONDI COLORATI */
         section { padding: 100px 20px; text-align: center; }
         .container { max-width: 1000px; margin: auto; }
-        h2 { font-family: 'Cormorant Garamond'; font-size: 3.2rem; color: var(--salvia-deep); margin-bottom: 30px; }
+        h2 { font-family: 'Cormorant Garamond'; font-size: 3.5rem; color: var(--salvia-deep); margin-bottom: 30px; }
         .linea-oro { width: 60px; height: 1px; background: var(--oro-caldo); margin: 20px auto; }
 
+        /* SFONDI SEZIONI */
+        .bg-perla { background-color: var(--perla); }
+        .bg-salvia { background-color: var(--salvia-bright); color: var(--salvia-deep); }
+        .bg-arancio { background-color: var(--arancio-seta); }
+        .bg-arancio-gradiente { background: linear-gradient(180deg, var(--perla) 0%, var(--arancio-seta) 50%, var(--perla) 100%); }
+
         /* COUNTDOWN */
-        .bg-salvia { background-color: var(--salvia-bright); }
-        .count-grid { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
-        .count-item { width: 100px; padding: 15px; background: rgba(255,255,255,0.4); border: 1px solid white; }
-        .count-item span { display: block; font-size: 2.5rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); }
+        .count-grid { display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
+        .count-item { width: 120px; padding: 20px; background: rgba(255,255,255,0.5); border: 1px solid white; border-radius: 2px; }
+        .count-item span { display: block; font-size: 3rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); }
+        .count-item label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; }
 
         /* CARTE INFO */
-        .info-card { background: white; padding: 60px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); position: relative; margin-bottom: 40px; }
+        .info-card { background: white; padding: 70px 40px; box-shadow: 0 15px 50px rgba(0,0,0,0.03); position: relative; margin-bottom: 50px; }
         .info-card::after { content: ""; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px solid var(--arancio-seta); pointer-events: none; }
-        .map-container { height: 350px; margin-top: 30px; border: 1px solid #eee; }
+        .map-container { height: 400px; margin-top: 40px; border: 1px solid #eee; overflow: hidden; }
 
         /* SLIDER FOTO */
-        .section-gallery { background: white; padding-bottom: 120px; }
-        .slider-track { display: flex; width: calc(280px * 32); animation: scrollInfinite 50s linear infinite; }
-        .slider-track img { width: 260px; height: 340px; object-fit: cover; margin: 0 10px; border: 8px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        @keyframes scrollInfinite { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-280px * 16)); } }
-
-        /* STORIA CON SFONDO ARANCIO */
-        .section-storia { background: linear-gradient(180deg, var(--perla) 0%, var(--arancio-seta) 50%, var(--perla) 100%); }
-        .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.4rem; line-height: 2.1; color: #3d3d3d; }
+        .slider-track { display: flex; width: calc(290px * 32); animation: scrollInfinite 60s linear infinite; }
+        .slider-track img { width: 270px; height: 360px; object-fit: cover; margin: 0 10px; border: 10px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+        @keyframes scrollInfinite { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-290px * 16)); } }
 
         /* FAQ ACCORDION */
-        .faq-container { max-width: 700px; margin: 40px auto; text-align: left; }
-        .faq-item { margin-bottom: 15px; border-bottom: 1px solid var(--arancio-seta); }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Cormorant Garamond'; font-size: 1.6rem; color: var(--salvia-deep); }
-        .faq-question::after { content: "+"; font-size: 1.5rem; color: var(--oro-caldo); }
+        .faq-container { max-width: 750px; margin: 50px auto; text-align: left; }
+        .faq-item { margin-bottom: 20px; border-bottom: 1px solid var(--arancio-lux); background: white; padding: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Cormorant Garamond'; font-size: 1.8rem; color: var(--salvia-deep); font-weight: 500; }
+        .faq-question::after { content: "+"; font-size: 1.8rem; color: var(--oro-caldo); font-weight: 300; }
         .faq-item.active .faq-question::after { content: "−"; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 20px; font-size: 1rem; color: #555; }
-        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 20px; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; padding: 0 20px; font-size: 1.05rem; line-height: 1.8; color: #444; }
+        .faq-item.active .faq-answer { max-height: 400px; padding-bottom: 25px; }
 
         /* RSVP */
-        .input-wedding { width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-bottom: 1px solid var(--salvia-bright); background: transparent; font-family: 'Montserrat'; }
-        .btn-lux { background: var(--salvia-deep); color: white; padding: 20px; border: none; width: 100%; letter-spacing: 3px; cursor: pointer; text-transform: uppercase; font-weight: 600; transition: 0.3s; }
-        .btn-lux:hover { background: var(--oro-caldo); }
+        .form-container { max-width: 550px; margin: 50px auto 0; background: white; padding: 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.03); border: 1px solid #f8f8f8; }
+        .input-wedding { width: 100%; padding: 18px; margin-bottom: 25px; border: none; border-bottom: 1px solid var(--salvia-bright); background: transparent; font-family: 'Montserrat'; font-size: 1rem; color: var(--text); }
+        .input-wedding:focus { border-bottom-color: var(--oro-caldo); outline: none; }
+        .btn-lux { background: var(--salvia-deep); color: white; padding: 22px; border: none; width: 100%; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; font-weight: 600; transition: 0.4s; font-size: 0.9rem; }
+        .btn-lux:hover { background: var(--oro-caldo); letter-spacing: 5px; }
 
-        footer { padding: 80px 20px; background: white; border-top: 1px solid var(--arancio-seta); }
+        /* STORIA */
+        .storia-content { max-width: 850px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.45rem; line-height: 2.2; color: #3d3d3d; }
+        .storia-decor { text-align: center; font-size: 2.5rem; color: var(--oro-caldo); margin: 50px 0; opacity: 0.7; }
+
+        footer { padding: 100px 20px; background: white; border-top: 1px solid var(--arancio-seta); }
     </style>
 </head>
 <body>
@@ -118,11 +128,13 @@
     <section class="hero">
         <div class="hero-img"></div>
         <div class="hero-banner">
-            <p style="letter-spacing: 4px; font-size: 0.8rem; text-transform: uppercase;">03 Ottobre 2026</p>
-            <h1 style="font-family: 'Great Vibes'; font-size: 5rem; color: var(--salvia-deep); margin: 5px 0;">Chiara & Gregorio</h1>
-            <p style="font-style: italic; font-family: 'Cormorant Garamond'; font-size: 1.3rem;">"Una corda a tre capi non si rompe così presto" - Ecclesiaste 4,12</p>
+            <p style="letter-spacing: 5px; font-size: 0.8rem; text-transform: uppercase;">03 Ottobre 2026</p>
+            <h1 style="font-family: 'Great Vibes'; font-size: 5.5rem; color: var(--salvia-deep); margin: 5px 0; font-weight: 400;">Chiara & Gregorio</h1>
+            <p style="font-style: italic; font-family: 'Cormorant Garamond'; font-size: 1.4rem;">"Una corda a tre capi non si rompe così presto" - Ecclesiaste 4,12</p>
         </div>
     </section>
+
+    <div class="welcome-note">Siamo felici di condividere con voi il giorno più bello della nostra vita</div>
 
     <section class="bg-salvia">
         <div class="container">
@@ -136,7 +148,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="bg-perla">
         <div class="container">
             <div class="info-card">
                 <h2>La Cerimonia</h2>
@@ -146,13 +158,13 @@
                 <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.246419747971!2d12.2198!3d45.6025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDM2JzA5LjAiTiAxMsKwMTMnMTEuMyJF!5e0!3m2!1sit!2sit!4v1620000000000" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2778.694663805988!2d12.636653976891638!3d45.85739190705039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477be34f593e36e3%3A0xc023a105f99f36b3!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1715852854215!5m2!1sit!2sit2" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <section style="background: var(--perla-riflesso);">
+    <section class="bg-arancio">
         <div class="container">
             <div class="info-card" style="border-top: 5px solid var(--arancio-lux);">
                 <h2>Il Ricevimento</h2>
@@ -162,18 +174,18 @@
                 <p>Via San Martino, 34 - 33087 Pasiano di Pordenone (PN)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2783.5678!2d12.6345!3d45.8567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796f6e55555555%3A0x123456789!2zVmlsbGEgTHVwcGlz!5e0!3m2!1sit!2sit!4v1620000000000" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2778.694663805988!2d12.636653976891638!3d45.85739190705039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477be34f593e36e3%3A0xc023a105f99f36b3!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1715852854215!5m2!1sit!2sit3" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-gallery">
+    <section class="bg-salvia">
         <div class="container">
-            <h2>Qualche sorriso e qualche smorfia</h2>
+            <h2>Qualche sorriso (e qualche smorfia)</h2>
             <div class="linea-oro"></div>
         </div>
-        <div style="margin-top: 40px;">
+        <div style="margin-top: 60px; overflow: hidden;">
             <div class="slider-track">
                 <img src="b.jpg"> <img src="bb.jpg"> <img src="c.jpg"> <img src="d.jpg">
                 <img src="e.jpg"> <img src="f.jpg"> <img src="ff.jpg"> <img src="g.jpg">
@@ -187,22 +199,38 @@
         </div>
     </section>
 
-    <section>
+    <section class="bg-perla">
         <div class="container">
             <div class="info-card">
                 <h2>Wedding Wishlist</h2>
                 <div class="linea-oro"></div>
                 <p>Se desiderate contribuire alla nostra nuova casa:</p>
-                <div style="background: white; padding: 30px; border: 1px dashed var(--salvia-bright); margin-top: 20px;">
-                    <p><strong>IBAN COINTESTATO</strong></p>
-                    <p style="font-size: 1.2rem; letter-spacing: 2px; color: var(--salvia-deep);">IT 00 X 00000 00000 000000000000</p>
-                    <p style="font-size: 0.8rem;">Chiara Vincenzi & Gregorio Tronchin</p>
+                <div style="background: white; padding: 40px; border: 1px dashed var(--salvia-bright); margin-top: 30px; border-radius: 2px;">
+                    <p style="letter-spacing: 1px; font-size: 0.8rem; color: var(--oro-caldo);">IBAN COINTESTATO</p>
+                    <p style="font-size: 1.3rem; letter-spacing: 3px; color: var(--salvia-deep); font-weight: 500;">IT 00 X 00000 00000 000000000000</p>
+                    <p style="font-size: 0.9rem; font-style: italic;">Chiara Vincenzi & Gregorio Tronchin</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="bg-salvia">
+        <div class="container">
+            <div class="info-card">
+                <h2>R.S.V.P.</h2>
+                <div class="linea-oro"></div>
+                <p>Conferma la tua presenza entro il</p>
+                <p style="font-size: 1.6rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600;">30 Agosto 2026</p>
+                <div class="form-container">
+                    <input type="text" placeholder="Nome e Cognome" class="input-wedding">
+                    <textarea rows="2" placeholder="Note catering (Allergie/Intolleranze)" class="input-wedding"></textarea>
+                    <button class="btn-lux" onclick="alert('Grazie per la conferma!')">Invia RSVP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-arancio">
         <div class="container">
             <h2>Domande Frequenti</h2>
             <div class="linea-oro"></div>
@@ -223,7 +251,7 @@
         </div>
     </section>
 
-    <section class="section-storia">
+    <section class="section-storia bg-arancio-gradiente">
         <div class="container">
             <div class="storia-content">
                 <h2 style="text-align: center;">La nostra Storia</h2>
@@ -238,25 +266,11 @@
                 <p>Tutto iniziò con un messaggio misterioso che sbucò dal cellulare di Chiara. Questo sms, spedito da un numero sconosciuto, l'aveva invitata a presentarsi in piazza a un'ora precisa, senza specificare il motivo: “Ciao, ci vediamo con tutti gli altri in piazza il giorno X alle ore X”. Impossibilitata a rispondere al messaggio per chiedere chiarimenti a causa del suo piano tariffario, decise di seguire l’invito per capire di cosa si trattasse, accompagnata dal papà Alessandro. Non era specificato nemmeno di che piazza si trattasse, però Chiara decise di tentare dirigendosi quel fatidico giorno presso l’unica piazza presente a Santrovaso, il suo paese, perfettamente in orario come indicato sul messaggio. Lo sconforto crebbe con il passare dei minuti: un quarto d’ora era già passato e la piazza era ancora deserta. Stava per arrendersi e tornare verso casa quando improvvisamente vide arrivare una sua amica coetanea. Chiara, provando un grande sollievo, si diresse da lei e le raccontò del motivo per cui si trovava lì. Lei, stupita, la informò che effettivamente ci sarebbe stato un incontro: l’avevano annunciato ai ragazzi appena cresimati in chiesa, durante una riunione alla quale Chiara non aveva potuto partecipare. Le sarà arrivato per questo motivo il messaggio? L’amica non aveva ricevuto nulla, sapeva fosse solo un comunicato verbale. E Chiara, dal canto suo, non aveva dato il suo numero a nessuno. Per di più l’orario che era stato indicato dall’sms era errato: si sarebbe infatti svolto esattamente mezz’ora dopo ciò che le era stato riportato.</p>
                 <p>Piena di dubbi ma spinta dalla curiosità, decise di restare per provare a capirne un po’ di più. Tra una risata e l’altra trascorse il tempo e piano piano la piazza si riempì di volti noti, tra cui quello di Gregorio. Ognuno di quei ragazzi sembrava sapere esattamente cosa stesse succedendo, mentre lei ne era completamente all’oscuro. Ebbe giusto il tempo di fare qualche domanda quando iniziarono piano piano ad entrare tutti nella chiesetta. Non appena seduta, la breve introduzione fatta le chiarì che si trattava dell’organizzazione del post-cresima. Non sapeva ancora bene di cosa si trattasse, ma decise di fidarsi continuando ad ascoltare. Le dissero che si sarebbe trattato di un percorso di crescita spirituale e di formazione cristiana rivolto a loro: tutti ragazzi che avevano da poco ricevuto il sacramento della Cresima. Sarebbe stato un modo per continuare a vivere la propria fede in modo attivo e consapevole, anche dopo aver completato il percorso catechistico. Un’opportunità per conoscere meglio la bibbia, la chiesa e i sacramenti. I ragazzi presenti sarebbero stati divisi in gruppi da 5-6 persone e ad ogni gruppo sarebbe stata affidata una coppia di 'padrini', adulti di riferimento che li avrebbero accompagnati nel loro cammino. La divisione in gruppi, spiegarono, sarebbe avvenuna in modo del tutto casuale tramite la pesca dei bigliettini.</p>
                 <p>Il sorteggio fece finire guarda caso Chiara e Gregorio, nello stesso gruppo del post-cresima. Mentre lui arrossì solo al pensiero, Chiara provava ancora un po’ di imbarazzo nei confronti del ragazzo ma, per fortuna, il gruppo si completò con l'aggiunta di altri amici e l’atmosfera fu decisamente più sciolta e rilassata. Qualche giorno dopo quell’incontro, un altro messaggio proveniente dallo stesso numero sconosciuto della prima volta la sconvolse: “Ciao Luca, non ti abbiamo visto sabato. Tutto bene?” Chiara collegò i puntini capendo che quindi, quel primo misterioso messaggio in realtà non doveva essere indirizzato a lei, semplicemente qualcuno proveniente da chissà dove, aveva sbagliato numero. La sua teoria venne poi confermata dallo stesso mittente, che si scusò e sparì. Rimase stupefatta perché si rese conto che la sua presenza a quell’evento, era stata del tutto casuale. Era possibile che una serie di coincidenze così assurde fosse solo frutto del caso? O forse c'era qualcosa di più profondo, un disegno divino che l'aveva condotta lì? Ancora non riusciva a spiegarselo, ma sentì che stava percorrendo la strada giusta, qualunque fosse la destinazione. Poco tempo dopo si tenne il primo incontro a gruppi separati e la ragazza si sentì subito a suo agio, anche grazie ai meravigliosi padrini a cui era stata affidata.</p>
-                <p>Settimana dopo settimana, Chiara e Gregorio, proprio grazie a questi incontri, avevano avuto modo di conoscersi più a fondo, scoprendo aspetti dell'altro che fino a quel momento erano rimasti celati. Chiara ebbe l’occasione di ricredersi scoprendo che Gregorio non era poi così strano e imbarazzante ma anzi, aveva un cuore tenero e una mente brillante. Lui, invece, che lei era ancora più affascinante e in gamba di quanto aveva potuto immaginare. Con il tempo anche lei fu catturata e divenne incapace di distogliere lo sguardo e il pensiero da lui. Erano ancora troppo giovani per comprendere appieno ciò che stavano provando l’uno nei confronti dell’altra, ma in quel momento sentivano che la loro connessione era qualcosa di speciale, un tesoro da custodire. </p>
+                <p>Settimana dopo settimana, Chiara e Gregorio, proprio grazie a questi incontri, avevano avuto modo di conoscersi più a fondo, scoprendo aspetti dell'altro che fino a quel momento erano rimasti celati. Chiara ebbe l’occasione di ricredersi scoprendo che Gregorio non era poi così strano e imbarazzante ma anzi, aveva un cuore tenero e una mente brillante. Lui, invece, che lei era ancora più affascinante e in gamba di quanto aveva potuto immaginare. Con il tempo anche lei fue catturata e divenne incapace di distogliere lo sguardo e il pensiero da lui. Erano ancora troppo giovani per comprendere appieno ciò che stavano provando l’uno nei confronti dell’altra, ma in quel momento sentivano che la loro connessione era qualcosa di speciale, un tesoro da custodire. </p>
                 <p>Ripresero a scriversi e le loro conversazioni, all'inizio ancora impacciate, si trasformarono in lunghe chiacchierate, piene di risate e confidenze e, quello, fu il punto di partenza della loro storia infinita. Negli anni, Chiara, con la sua delicatezza, seppe sciogliere il nodo che stringeva il cuore di Gregorio, aiutandolo ad esprimere le emozioni che aveva da sempre tenuto prigioniere dentro di sé. Lo aiutò a cogliere la bellezza nelle piccole cose e fu in grado di spronarlo a sognare in grande, credendo in lui ancora prima che lui potesse farlo per se stesso. Gregorio, con la sua pazienza, curò le insicurezze di Chiara rendendola una donna forte e determinata. Ammirava ogni suo passo infondendole il coraggio di far sentire la sua voce e di affermare se stessa. Le fece capire che non per forza il bicchiere è sempre mezzo vuoto. La fece ridere portandole la luce anche nei momenti più bui e la protesse sempre, offrendole un luogo sicuro dove potersi rifugiare. Ogni giorno era un’avventura da condividere, un nuovo ricordo da creare. Costruirono mattone dopo mattone un amore autentico, fatto di affinità e sintonia.</p>
                 <p>Non fu sempre tutto rose e fiori ma ciò che ha importanza è che nelle loro dure battaglie crebbero insieme, migliorandosi a vicenda giorno dopo giorno. Dal non trovare un senso da dare alla propria vita, al trovarlo l’uno nell’altra. Dal non sapere niente sul proprio futuro, al realizzare che comunque, avrebbero desiderato passarlo insieme. Questa è la loro storia, la storia di due persone che grazie a Dio si sono trovate, scelte e amate e che insieme, come hanno sempre fatto, sono pronte a scrivere un nuovo capitolo della loro vita.</p>
                 <p>Oggi, mentre si preparano a pronunciare il fatidico "sì”, Chiara e Gregorio guardano indietro con nostalgia e gratitudine. E mentre si stringono la mano con un sorriso che dice più di mille parole, sentono ancora il battito accelerato del cuore al pensiero che il disegno che il Signore ha creato per loro è stato perfetto, unendoli sin dall’inizio dei tempi. Dio in questo loro percorso è stato ed è tuttora fondamentale, come se fosse il tessuto prezioso che tramite il filo dell’amore, ha dato vita alla loro storia in un ricamo meravigliosamente perfetto, come solo ed esclusivamente lui avrebbe mai potuto fare. E’ stato la loro stella polare, li ha guidati come un faro verso la luce della propria vocazione. Vocazione che oggi, porta con sé un nome ed un cognome: Chiara Vincenzi per lui e Gregorio Tronchin per lei.</p>
                 <div class="storia-decor">~ ❦ ~</div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <div class="info-card">
-                <h2>R.S.V.P.</h2>
-                <p>Conferma la tua presenza entro il 30 Agosto 2026</p>
-                <div style="max-width: 500px; margin: 30px auto;">
-                    <input type="text" placeholder="Nome e Cognome" class="input-wedding">
-                    <textarea rows="2" placeholder="Note (Allergie/Intolleranze)" class="input-wedding"></textarea>
-                    <button class="btn-lux" onclick="alert('Grazie!')">Invia</button>
-                </div>
             </div>
         </div>
     </section>
@@ -294,10 +308,12 @@
         }, 1000);
     }
 
-    // Script per FAQ Accordion
+    // FAQ Accordion
     document.querySelectorAll('.faq-item').forEach(item => {
-        item.addEventListener('click', () => {
-            item.classList.toggle('active');
+        item.addEventListener('click', function(e) {
+            // Evita l'apertura se si clicca direttamente sulla risposta già aperta
+            if (e.target.closest('.faq-answer')) return;
+            this.classList.toggle('active');
         });
     });
 </script>
