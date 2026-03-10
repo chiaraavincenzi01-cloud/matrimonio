@@ -11,7 +11,7 @@
             --perla: #fdfcf9;
             --salvia-bright: #b1c9b6;
             --salvia-deep: #5d7062;
-            --arancio-lux: #f7bd96;
+            --arancio-lux: #f7bd96; /* Arancione Pastello */
             --oro-linea: #d4af37;
             --text: #333333;
         }
@@ -22,7 +22,6 @@
             margin: 0; 
             font-family: 'Montserrat', sans-serif; 
             background: var(--perla); 
-            /* Sfondo con pattern floreale leggerissimo */
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             color: var(--text); 
             overflow-x: hidden; 
@@ -41,8 +40,20 @@
         .bottom { bottom: 0; height: 50%; clip-path: polygon(0 100%, 100% 100%, 50% 0); z-index: 7; }
         .left { width: 50%; clip-path: polygon(0 0, 0 100%, 100% 50%); z-index: 6; background: #f9f9f9; }
         .right { right: 0; width: 50%; clip-path: polygon(100% 0, 100% 100%, 0 50%); z-index: 6; background: #f9f9f9; }
-        .wax { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: var(--arancio-lux); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.5s; }
-        .wax span { color: white; font-size: 1.8rem; font-family: 'Cormorant Garamond'; letter-spacing: 2px; }
+        
+        /* CERALACCA CON FONT REGALE */
+        .wax { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 120px; height: 120px; background: var(--arancio-lux); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; z-index: 20; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.5s; 
+        }
+        .wax span { 
+            color: white; 
+            font-size: 2.2rem; 
+            font-family: 'Great Vibes', cursive; /* Font regale richiesto */
+            letter-spacing: 1px; 
+        }
 
         .aperta .top { transform: rotateX(110deg); opacity: 0; }
         .aperta .bottom { transform: rotateX(-110deg); opacity: 0; }
@@ -68,28 +79,36 @@
             background: url("a.jpg.jpeg") center/cover no-repeat; 
             z-index: 0;
         }
-        /* Overlay per rendere leggibile il testo */
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.3); /* Leggero velo bianco */
+            background: rgba(255, 255, 255, 0.3); 
             z-index: 1;
         }
         .hero-text { 
             z-index: 2; 
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.6); /* Box semitrasparente intorno al testo */
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.7); 
             backdrop-filter: blur(5px);
-            border-radius: 2px;
+            border: 2px solid var(--arancio-lux); /* Richiamo arancio */
         }
         .hero-text h1 { 
             font-family: 'Great Vibes', cursive; 
             font-size: 5rem; 
             color: var(--salvia-deep); 
             margin: 10px 0; 
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
         }
-        .hero-text p { letter-spacing: 5px; font-weight: 400; text-transform: uppercase; font-size: 0.85rem; color: #444; }
+
+        /* SEZIONE COLORE ARANCIO (NOVITÀ) */
+        .welcome-note {
+            background-color: var(--arancio-lux);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            font-family: 'Cormorant Garamond';
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
 
         /* SEZIONI */
         section { padding: 100px 20px; width: 100%; position: relative; }
@@ -100,7 +119,7 @@
         .bg-perla { background-color: transparent; }
         
         .linea-oro { 
-            width: 100px; height: 1px; 
+            width: 150px; height: 1px; 
             background: linear-gradient(to right, transparent, var(--oro-linea), transparent); 
             margin: 20px auto; 
         }
@@ -119,29 +138,25 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.03); 
             position: relative;
         }
-        /* Decorazione angoli */
         .info-card::before {
             content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid var(--oro-linea); opacity: 0.3; pointer-events: none;
+            border: 1px solid var(--arancio-lux); opacity: 0.4; pointer-events: none;
         }
 
         .map-container { 
             height: 400px; 
             margin-top: 30px; 
-            filter: grayscale(0.2); 
             border: 1px solid #eee;
         }
 
         /* GALLERY */
         .masonry { column-count: 3; column-gap: 15px; margin-top: 50px; }
         .masonry img { width: 100%; margin-bottom: 15px; border: 8px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; }
-        .masonry img:hover { transform: scale(1.02); }
 
         /* STORIA */
-        .section-storia { background: rgba(255,255,255,0.8); line-height: 1.8; }
-        .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: #444; }
-        .storia-content h2 { text-align: center; }
-        .storia-decor { text-align: center; font-size: 2rem; color: var(--oro-linea); margin: 30px 0; }
+        .section-storia { background: rgba(247, 189, 150, 0.15); line-height: 1.8; } /* Sfondo arancio chiarissimo */
+        .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #444; }
+        .storia-decor { text-align: center; font-size: 2rem; color: var(--arancio-lux); margin: 30px 0; }
 
         /* RSVP */
         .btn-lux { 
@@ -149,13 +164,12 @@
             width: 100%; letter-spacing: 3px; cursor: pointer; transition: 0.4s; text-transform: uppercase; 
             font-weight: 600;
         }
-        .btn-lux:hover { background: var(--arancio-lux); letter-spacing: 5px; }
+        .btn-lux:hover { background: var(--arancio-lux); }
 
         @media (max-width: 768px) {
             .hero-text h1 { font-size: 3.5rem; }
             .count-grid { grid-template-columns: repeat(2, 1fr); }
             .masonry { column-count: 2; }
-            section { padding: 60px 20px; }
         }
     </style>
 </head>
@@ -188,6 +202,10 @@
         </div>
     </section>
 
+    <div class="welcome-note">
+        Siamo felici di condividere con voi il giorno più bello della nostra vita
+    </div>
+
     <section class="bg-salvia">
         <div class="container">
             <h2>L'attesa finisce tra:</h2>
@@ -209,7 +227,7 @@
                 <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.453396783935!2d12.2435798!3d45.6212134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4779493a52e1f407%3A0x67906950346a0664!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Preganziol%20TV!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2785.4419637775586!2d12.2359418!3d45.7222409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47793664d4c5c767%3A0x6a0f4d360f959c1b!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Sant&#39;Urbano%20TV!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -217,14 +235,14 @@
 
     <section class="bg-perla">
         <div class="container">
-            <div class="info-card">
+            <div class="info-card" style="border-top: 5px solid var(--arancio-lux);">
                 <h2>Il Ricevimento in villa</h2>
                 <p>Dopo la cerimonia, seguirà il ricevimento dalle ore 13:30 circa</p>
                 <p><strong>Villa Luppis</strong></p>
                 <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2779.67086036136!2d12.6056637!3d45.8379434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796939b6c49e21%3A0x280e72262f3b97b0!2sHotel%20Villa%20Luppis!5e0!3m2!1sit!2sit!4v1700000000001" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.681144464157!2d12.6133299!3d45.8576403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4779606138676a6b%3A0x280e817d23f7903d!2sVia%20S.%20Martino%2C%2034%2C%2033087%20Pasiano%20di%20Pordenone%20PN!5e0!3m2!1sit!2sit!4v1700000000001" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -244,12 +262,12 @@
 
     <section class="bg-perla">
         <div class="container">
-            <div class="info-card" style="border-color: var(--arancio-lux);">
+            <div class="info-card" style="border-color: var(--arancio-lux); background-color: #fff9f5;">
                 <h2>Wedding Wishlist</h2>
                 <p>La vostra presenza è per noi il dono più prezioso. Se desiderate aiutarci a costruire il nostro futuro e la nostra casa, potete farlo qui:</p>
-                <div style="background: #f9f9f9; padding: 30px; border: 1px dashed var(--oro-linea); margin-top: 20px;">
+                <div style="background: white; padding: 30px; border: 1px dashed var(--arancio-lux); margin-top: 20px;">
                     <p><strong>INTESTATO A:</strong><br>Chiara Vincenzi & Gregorio Tronchin</p>
-                    <div style="font-weight: 500; letter-spacing: 2px; color: var(--salvia-deep); margin: 15px 0;">IT 00 X 00000 00000 000000000000</div>
+                    <div style="font-weight: 500; letter-spacing: 2px; color: var(--salvia-deep); margin: 15px 0; font-size: 1.2rem;">IT 00 X 00000 00000 000000000000</div>
                     <p style="font-size: 0.8rem; opacity: 0.7;">Grazie di cuore per condividere con noi questo inizio</p>
                 </div>
             </div>
@@ -262,8 +280,8 @@
                 <h2>Conferma la tua presenza</h2>
                 <p>Entro il 30 Agosto 2026</p>
                 <div style="max-width: 500px; margin: auto; padding-top: 30px;">
-                    <input type="text" placeholder="Nome e Cognome" style="width: 100%; padding: 12px; margin-bottom: 20px; border: none; border-bottom: 1px solid var(--salvia-bright);">
-                    <textarea rows="2" placeholder="Scrivi qui se hai allergie, intolleranze, o note particolari" style="width: 100%; padding: 12px; margin-bottom: 20px; border: none; border-bottom: 1px solid var(--salvia-bright); background: transparent;"></textarea>
+                    <input type="text" placeholder="Nome e Cognome" style="width: 100%; padding: 12px; margin-bottom: 20px; border: none; border-bottom: 2px solid var(--arancio-lux);">
+                    <textarea rows="2" placeholder="Scrivi qui se hai allergie, intolleranze, o note particolari" style="width: 100%; padding: 12px; margin-bottom: 20px; border: none; border-bottom: 2px solid var(--arancio-lux); background: transparent;"></textarea>
                     <button class="btn-lux" onclick="alert('Grazie! Conferma inviata.')">Invia Conferma</button>
                 </div>
             </div>
@@ -324,7 +342,7 @@ Vocazione che oggi, porta con sé un nome ed un cognome:</p>
         </div>
     </section>
 
-    <footer style="padding: 80px 20px; text-align: center; background: white;">
+    <footer style="padding: 80px 20px; text-align: center; background: white; border-top: 5px solid var(--arancio-lux);">
         <h1 style="font-family: 'Great Vibes'; color: var(--salvia-deep); font-size: 4rem; margin: 0;">Chiara & Gregorio</h1>
         <p style="letter-spacing: 5px; opacity: 0.6; margin-top: 20px; font-size: 0.8rem;">03.10.2026 • SANTROVASO</p>
     </footer>
