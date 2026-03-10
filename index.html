@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chiara & Gregorio | 03.10.2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&family=Montserrat:wght@100;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400;1,600&family=Montserrat:wght@100;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --perla: #fdfcf9;
-            --salvia-bright: #BCCFB8;
+            --perla-riflesso: #f5f3ef;
+            --salvia-bright: #D4E2D2; /* Più luminoso e luxury */
             --salvia-deep: #4e7a51;
-            --arancio-lux: #ffeaca;
-            --arancio-pastello: #FCDABF;
-            --oro-linea: #e5b412;
-            --text: #334630;
-            --section-padding: 120px; /* Spaziatura uniforme per tutte le sezioni */
+            --arancio-seta: #FDEBD0; /* Arancio pastello più delicato */
+            --arancio-lux: #FCDABF;
+            --oro-caldo: #D4AF37;
+            --text: #2C362B;
+            --section-padding: 140px;
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -28,94 +29,99 @@
             color: var(--text); 
             overflow-x: hidden; 
             font-weight: 300; 
+            line-height: 1.6;
         }
 
-        /* BUSTA ANIMATA */
+        /* BUSTA ANIMATA LUXURY */
         #busta-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #e0ddd5; display: flex; justify-content: center; align-items: center;
             z-index: 9999; perspective: 2000px;
         }
-        .envelope { width: 100%; height: 100%; position: relative; background: #fdfcf9; }
-        .flap { position: absolute; width: 100%; height: 100%; background: #ffffff; transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1); z-index: 5; box-shadow: inset 0 0 50px rgba(0,0,0,0.05); }
-        .top { height: 50%; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; z-index: 8; }
+        .envelope { width: 100%; height: 100%; position: relative; background: var(--perla); }
+        .flap { position: absolute; width: 100%; height: 100%; background: #ffffff; transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1); z-index: 5; }
+        .top { height: 50%; clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; z-index: 8; box-shadow: inset 0 0 30px rgba(0,0,0,0.02); }
         .bottom { bottom: 0; height: 50%; clip-path: polygon(0 100%, 100% 100%, 50% 0); z-index: 7; }
-        .left { width: 50%; clip-path: polygon(0 0, 0 100%, 100% 50%); z-index: 6; background: #f9f9f9; }
-        .right { right: 0; width: 50%; clip-path: polygon(100% 0, 100% 100%, 0 50%); z-index: 6; background: #f9f9f9; }
+        .left { width: 50%; clip-path: polygon(0 0, 0 100%, 100% 50%); z-index: 6; background: #fcfcfc; }
+        .right { right: 0; width: 50%; clip-path: polygon(100% 0, 100% 100%, 0 50%); z-index: 6; background: #fcfcfc; }
         
         .wax { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            width: 120px; height: 120px; background: var(--salvia-deep); 
+            width: 100px; height: 100px; background: var(--oro-caldo); 
             border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; z-index: 20; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.5s; 
+            cursor: pointer; z-index: 20; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.5s; 
+            border: 2px solid rgba(255,255,255,0.3);
         }
-        .wax span { color: white; font-size: 2.2rem; font-family: 'Great Vibes', cursive; letter-spacing: 1px; }
+        .wax span { color: white; font-size: 1.8rem; font-family: 'Great Vibes', cursive; }
 
         .aperta .top { transform: rotateX(110deg); opacity: 0; }
-        .aperta .bottom { transform: rotateX(-110deg); opacity: 0; }
-        .aperta .left { transform: translateX(-100%); opacity: 0; }
-        .aperta .right { transform: translateX(100%); opacity: 0; }
         .aperta .wax { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-        .aperta#busta-container { visibility: hidden; opacity: 0; transition: 1.5s; pointer-events: none; }
+        .aperta#busta-container { visibility: hidden; opacity: 0; transition: 1.8s; pointer-events: none; }
 
-        /* SEZIONI E LAYOUT */
-        section { padding: var(--section-padding) 20px; width: 100%; position: relative; }
-        .container { max-width: 1000px; margin: auto; text-align: center; }
-        h2 { font-family: 'Cormorant Garamond'; font-size: 3.5rem; font-weight: 300; margin-bottom: 30px; color: var(--salvia-deep); }
-        
-        .bg-salvia { background-color: var(--salvia-bright); color: var(--salvia-deep); }
-        .bg-perla { background-color: transparent; }
-        .linea-oro { width: 150px; height: 1px; background: linear-gradient(to right, transparent, var(--oro-linea), transparent); margin: 20px auto; }
-
-        /* HERO SECTION */
+        /* HERO SECTION - STRISCIA TUTTAPAGINA */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 0; }
         .hero-img { 
-            position: absolute; width: 110%; height: 110%; background: url("a.jpg") center/cover no-repeat; 
-            z-index: 0; opacity: 0.6; animation: kenBurns 20s infinite alternate ease-in-out; 
+            position: absolute; width: 100%; height: 100%; background: url("a.jpg") center/cover no-repeat; 
+            z-index: 0; opacity: 0.7; animation: slowZoom 25s infinite alternate ease-in-out; 
         }
-        @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 252, 249, 0.4); z-index: 1; }
-        .hero-text { z-index: 2; padding: 60px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 1px solid var(--arancio-lux); animation: fadeInText 3s ease-out; }
-        @keyframes fadeInText { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes slowZoom { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+        
+        .hero-banner {
+            z-index: 2; width: 100%; background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px); padding: 50px 0;
+            border-top: 1px solid var(--arancio-seta); border-bottom: 1px solid var(--arancio-seta);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.05); text-align: center;
+            transform: translateY(20%); animation: slideBanner 2s ease-out forwards;
+        }
+        @keyframes slideBanner { 0% { opacity: 0; width: 0; } 100% { opacity: 1; width: 100%; } }
 
-        .welcome-note { background-color: var(--arancio-lux); color: var(--salvia-deep); padding: 80px 20px; text-align: center; font-family: 'Cormorant Garamond'; font-size: 1.8rem; letter-spacing: 2px; }
+        .welcome-note { background: linear-gradient(to right, var(--perla), var(--arancio-seta), var(--perla)); color: var(--salvia-deep); padding: 60px 20px; text-align: center; font-family: 'Cormorant Garamond'; font-size: 1.6rem; letter-spacing: 3px; font-style: italic; }
 
-        /* COUNTDOWN */
-        .count-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 700px; margin: 40px auto; }
-        .count-item { padding: 25px; border: 1px solid rgba(78, 122, 81, 0.2); background: rgba(255,255,255,0.4); }
-        .count-item span { display: block; font-size: 3.5rem; font-family: 'Cormorant Garamond'; }
+        /* LAYOUT GENERALE */
+        section { padding: var(--section-padding) 20px; width: 100%; }
+        .container { max-width: 1100px; margin: auto; text-align: center; }
+        h2 { font-family: 'Cormorant Garamond'; font-size: 3.8rem; font-weight: 300; margin-bottom: 40px; color: var(--salvia-deep); letter-spacing: 1px; }
+        
+        /* COUNTDOWN LUXURY */
+        .bg-salvia { background-color: var(--salvia-bright); color: var(--salvia-deep); position: relative; }
+        .count-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 50px; }
+        .count-item { width: 130px; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 2px; border: 1px solid rgba(255,255,255,0.8); }
+        .count-item span { display: block; font-size: 3.5rem; font-family: 'Cormorant Garamond'; line-height: 1; margin-bottom: 5px; }
+        .count-item label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* INFO CARDS */
-        .info-card { background: white; color: var(--text); padding: 70px 40px; border: 1px solid #f2f2f2; box-shadow: 0 15px 40px rgba(0,0,0,0.03); position: relative; }
-        .info-card::before { content: ""; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px solid var(--arancio-lux); opacity: 0.3; pointer-events: none; }
-        .map-container { height: 400px; margin-top: 40px; border: 1px solid #eee; }
+        /* CARDS & MAPS */
+        .info-card { background: white; padding: 80px 50px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.02); }
+        .info-card::after { content: ""; position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; border: 1px solid var(--arancio-seta); pointer-events: none; }
+        .linea-oro { width: 80px; height: 1px; background: var(--oro-caldo); margin: 30px auto; }
+        .map-container { height: 450px; margin-top: 50px; filter: grayscale(0.2); }
 
         /* GALLERIA */
-        .section-gallery { background-color: var(--arancio-pastello); padding: var(--section-padding) 0; overflow: hidden; }
-        .slider-track { display: flex; width: calc(250px * 16); animation: scroll 40s linear infinite; }
-        .slider-track img { width: 220px; height: 300px; object-fit: cover; margin: 0 15px; border: 8px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 8)); } }
+        .section-gallery { background: linear-gradient(180deg, var(--perla) 0%, var(--arancio-seta) 100%); padding: var(--section-padding) 0; }
+        .slider-track img { width: 250px; height: 350px; object-fit: cover; margin: 0 20px; border: 12px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
 
         /* STORIA */
-        .section-storia { background: rgba(247, 189, 150, 0.05); line-height: 2; border-top: 1px solid var(--arancio-lux); }
-        .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #444; }
-        .storia-decor { text-align: center; font-size: 2.5rem; color: var(--arancio-lux); margin: 40px 0; }
+        .section-storia { background: var(--perla); }
+        .storia-content { max-width: 850px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; color: #3d3d3d; line-height: 2.2; }
+        .storia-decor { text-align: center; font-size: 2rem; color: var(--oro-caldo); margin: 50px 0; opacity: 0.6; }
 
         /* FAQ & FORM */
-        .faq-item { text-align: left; margin-bottom: 40px; padding-bottom: 25px; border-bottom: 1px solid #f0f0f0; }
-        .faq-item h3 { font-family: 'Cormorant Garamond'; font-size: 1.8rem; color: var(--salvia-deep); margin-bottom: 12px; }
+        .faq-item { text-align: left; margin-bottom: 50px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .faq-item h3 { font-family: 'Cormorant Garamond'; font-size: 2rem; color: var(--salvia-deep); font-weight: 400; }
         
-        .input-wedding { width: 100%; padding: 15px; margin-bottom: 25px; border: none; border-bottom: 2px solid var(--salvia-bright); background: transparent; font-family: 'Montserrat'; color: var(--text); transition: 0.3s; }
-        .input-wedding:focus { border-bottom-color: var(--salvia-deep); outline: none; }
+        .input-wedding { width: 100%; padding: 20px; margin-bottom: 30px; border: none; border-bottom: 1px solid var(--salvia-bright); background: transparent; font-family: 'Montserrat'; font-size: 1rem; }
+        .input-wedding:focus { border-bottom-color: var(--oro-caldo); outline: none; }
         
-        .btn-lux { background: var(--salvia-deep); color: white; padding: 22px; border: none; width: 100%; letter-spacing: 3px; cursor: pointer; transition: 0.4s; text-transform: uppercase; font-weight: 600; font-size: 1rem; }
-        .btn-lux:hover { background: var(--salvia-bright); color: var(--salvia-deep); }
+        .btn-lux { background: var(--salvia-deep); color: white; padding: 25px; border: none; width: 100%; letter-spacing: 4px; cursor: pointer; transition: 0.5s; text-transform: uppercase; font-size: 0.85rem; font-weight: 600; }
+        .btn-lux:hover { background: var(--oro-caldo); letter-spacing: 6px; }
+
+        footer { background: white; padding: 120px 20px; text-align: center; border-top: 1px solid var(--arancio-seta); }
 
         @media (max-width: 768px) {
-            .hero-text h1 { font-size: 3.5rem; }
-            .count-grid { grid-template-columns: repeat(2, 1fr); }
-            section { padding: 80px 20px; }
-            h2 { font-size: 2.8rem; }
+            h2 { font-size: 2.5rem; }
+            .hero-banner { padding: 30px 0; }
+            .hero-banner h1 { font-size: 3rem !important; }
+            .count-item { width: 45%; }
+            .section-padding { padding: 80px 20px; }
         }
     </style>
 </head>
@@ -130,16 +136,15 @@
 
 <audio id="audio" loop><source src="alex-productions-musica-romantica-per-matrimoni-e-san-valentino-amore(chosic.com).mp3" type="audio/mpeg"></audio>
 
-<div id="main-content" style="visibility: hidden; opacity: 0; transition: 2.5s ease-in-out;">
+<div id="main-content" style="visibility: hidden; opacity: 0; transition: 3s ease-in-out;">
     
     <section class="hero">
         <div class="hero-img"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-text">
-            <p style="letter-spacing: 3px; margin-bottom: 15px;">Sabato, 03 Ottobre 2026</p>
-            <h1 style="font-family: 'Great Vibes'; font-size: 5.5rem; color: var(--salvia-deep); margin: 0;">Chiara & Gregorio</h1>
+        <div class="hero-banner">
+            <p style="letter-spacing: 6px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 20px;">Sabato • 03 Ottobre 2026</p>
+            <h1 style="font-family: 'Great Vibes'; font-size: 6rem; color: var(--salvia-deep); margin: 0; font-weight: 400;">Chiara & Gregorio</h1>
             <div class="linea-oro"></div>
-            <p style="font-style: italic; font-family: 'Cormorant Garamond'; font-size: 1.3rem;">"Una corda a tre capi non si rompe così presto"<br>Ecclesiaste 4,12</p>
+            <p style="font-style: italic; font-family: 'Cormorant Garamond'; font-size: 1.4rem; color: var(--text);">"Una corda a tre capi non si rompe così presto"</p>
         </div>
     </section>
 
@@ -147,7 +152,7 @@
 
     <section class="bg-salvia">
         <div class="container">
-            <h2 style="color: var(--salvia-deep);">L'attesa finisce tra:</h2>
+            <h2>L'attesa della Gioia</h2>
             <div class="count-grid">
                 <div class="count-item"><span id="d">00</span><label>Giorni</label></div>
                 <div class="count-item"><span id="h">00</span><label>Ore</label></div>
@@ -157,31 +162,33 @@
         </div>
     </section>
 
-    <section class="bg-perla">
+    <section>
         <div class="container">
             <div class="info-card">
-                <h2>La Cerimonia in chiesa</h2>
-                <p>Ci diremo di "Sì" alle ore 11:00</p>
-                <p><strong>Chiesa dei Santi Gervasio e Protasio Martiri</strong></p>
+                <h2>La Cerimonia</h2>
+                <div class="linea-oro"></div>
+                <p>Avremo il piacere di scambiarci le promesse alle ore 11:00</p>
+                <p style="font-size: 1.3rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep);"><strong>Chiesa dei Santi Gervasio e Protasio Martiri</strong></p>
                 <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.834164344406!2d12.2185!3d45.6014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDM2JzA1LjAiTiAxMsKwMTMnMDYuNiJF!5e0!3m2!1sit!2sit!4v1620000000000" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.8344792621424!2d12.2305!3d45.6033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDM2JzExLjkiTiAxMsKwMTMnNDkuOCJF!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <section style="background: linear-gradient(to bottom, var(--perla), var(--arancio-lux));">
+    <section style="background: var(--perla-riflesso);">
         <div class="container">
-            <div class="info-card" style="border-top: 5px solid var(--arancio-pastello);">
-                <h2>Il Ricevimento in villa</h2>
-                <p>Dopo la cerimonia, seguirà il ricevimento dalle ore 13:30 circa</p>
-                <p><strong>Villa Luppis</strong></p>
+            <div class="info-card" style="border-top: 6px solid var(--arancio-lux);">
+                <h2>Il Ricevimento</h2>
+                <div class="linea-oro"></div>
+                <p>I festeggiamenti proseguiranno presso la splendida cornice di:</p>
+                <p style="font-size: 1.3rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep);"><strong>Villa Luppis</strong></p>
                 <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.77!2d12.61!3d45.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDUxJzAwLjAiTiAxMsKwMzYnMzYuMCJF!5e0!3m2!1sit!2sit!4v1620000000000" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.58!3d45.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDUxJzAwLjAiTiAxMsKwMzAnMDAuMCJF!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -189,9 +196,9 @@
 
     <section class="section-gallery">
         <div class="container">
-            <h2 style="color: var(--salvia-deep);">Sorrisi e smorfie</h2>
+            <h2>Momenti d'Amore</h2>
             <div class="linea-oro"></div>
-            <div style="padding: 40px 0;">
+            <div style="padding: 60px 0; overflow: hidden;">
                 <div class="slider-track">
                     <img src="b.jpg"> <img src="bb.jpg"> <img src="c.jpg"> <img src="d.jpg">
                     <img src="e.jpg"> <img src="f.jpg"> <img src="ff.jpg"> <img src="g.jpg">
@@ -202,15 +209,17 @@
         </div>
     </section>
 
-    <section class="bg-perla">
+    <section>
         <div class="container">
-            <div class="info-card" style="border-color: var(--arancio-lux); background-color: #fffaf7;">
+            <div class="info-card" style="background-color: #fffdfb;">
                 <h2>Wedding Wishlist</h2>
-                <p>La vostra presenza è per noi il dono più prezioso. Se desiderate aiutarci a costruire il nostro futuro e la nostra casa, potete farlo qui:</p>
-                <div style="background: white; padding: 40px; border: 1px dashed var(--salvia-bright); margin-top: 30px;">
-                    <p><strong>INTESTATO A:</strong><br>Chiara Vincenzi & Gregorio Tronchin</p>
-                    <div style="font-weight: 500; letter-spacing: 2px; color: var(--salvia-deep); margin: 20px 0; font-size: 1.2rem;">IT 00 X 00000 00000 000000000000</div>
-                    <p style="font-size: 0.85rem; opacity: 0.7;">Grazie di cuore per condividere con noi questo nuovo inizio</p>
+                <div class="linea-oro"></div>
+                <p>La vostra presenza è per noi il dono più prezioso. Se tuttavia desiderate contribuire al nostro inizio di vita insieme, potete farlo qui:</p>
+                <div style="background: white; padding: 50px; border: 1px solid var(--arancio-seta); margin-top: 40px; border-radius: 4px;">
+                    <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--oro-caldo);">INTESTATO A</p>
+                    <p><strong>Chiara Vincenzi & Gregorio Tronchin</strong></p>
+                    <div style="font-weight: 500; letter-spacing: 3px; color: var(--salvia-deep); margin: 25px 0; font-size: 1.3rem;">IT 00 X 00000 00000 000000000000</div>
+                    <p style="font-style: italic; opacity: 0.8;">"Grazie per il vostro pensiero gentile"</p>
                 </div>
             </div>
         </div>
@@ -219,35 +228,34 @@
     <section class="bg-salvia">
         <div class="container">
             <div class="info-card">
-                <h2>Conferma la tua presenza</h2>
-                <p>Entro il 30 Agosto 2026</p>
-                <div style="max-width: 500px; margin: 40px auto 0;">
+                <h2>R.S.V.P.</h2>
+                <p>Vi chiediamo di inviarci la vostra conferma entro il</p>
+                <p style="font-size: 1.5rem; font-family: 'Cormorant Garamond';"><strong>30 Agosto 2026</strong></p>
+                <div style="max-width: 500px; margin: 50px auto 0;">
                     <input type="text" placeholder="Nome e Cognome" class="input-wedding">
-                    <textarea rows="2" placeholder="Scrivi qui se hai allergie, intolleranze, o note particolari" class="input-wedding"></textarea>
-                    <button class="btn-lux" onclick="alert('Grazie! Conferma inviata.')">Invia Conferma</button>
+                    <textarea rows="2" placeholder="Scrivi qui se hai eventuali allergie, intolleranze, o note particolari" class="input-wedding"></textarea>
+                    <button class="btn-lux" onclick="alert('Grazie! La vostra presenza è stata registrata.')">Invia Conferma</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-perla">
+    <section>
         <div class="container">
-            <div class="info-card">
+            <div class="info-card" style="border: none;">
                 <h2>Domande Frequenti</h2>
                 <div class="linea-oro"></div>
-                <div style="max-width: 800px; margin: 40px auto;">
-                    <div class="faq-item">
-                        <h3>Posso portare un accompagnatore?</h3>
-                        <p>Se ti fa piacere essere accompagnato, indicalo nella sezione delle note quando registri la tua presenza. Saremo noi sposi a contattarti personalmente per confermarti la presenza del tuo +1</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>C'è parcheggio disponibile?</h3>
-                        <p>Certamente, la chiesa e la villa dispongono di un ampio parcheggio, non ti preoccupare!</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>Che dress code devo seguire?</h3>
-                        <p>Elegante e formale. Evita il colore bianco, riservato alla sposa, e il colore arancione, riservato alle testimoni.</p>
-                    </div>
+                <div class="faq-item">
+                    <h3>Posso portare un accompagnatore?</h3>
+                    <p>Se desideri essere accompagnato, indicalo nelle note. Sarà nostra premura confermarti la disponibilità del posto aggiuntivo il prima possibile.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Parcheggio e Logistica</h3>
+                    <p>Sia la Chiesa che Villa Luppis offrono ampi spazi di parcheggio riservati agli ospiti dell'evento.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Dress Code</h3>
+                    <p>Elegante e formale. Evita il colore bianco, riservato alla sposa, e l'arancione, riservato alle testimoni.</p>
                 </div>
             </div>
         </div>
@@ -277,9 +285,9 @@
         </div>
     </section>
 
-    <footer style="padding: 120px 20px; text-align: center; background: white; border-top: 5px solid var(--arancio-lux);">
-        <h1 style="font-family: 'Great Vibes'; color: var(--salvia-deep); font-size: 4.5rem; margin: 0;">Chiara & Gregorio</h1>
-        <p style="letter-spacing: 5px; opacity: 0.6; margin-top: 25px; font-size: 0.9rem;">03.10.2026 • SANTROVASO</p>
+    <footer>
+        <h1 style="font-family: 'Great Vibes'; color: var(--salvia-deep); font-size: 4rem; margin: 0;">Chiara & Gregorio</h1>
+        <p style="letter-spacing: 5px; opacity: 0.5; margin-top: 30px; font-size: 0.8rem;">03.10.2026 • SANTROVASO</p>
     </footer>
 
 </div>
@@ -288,14 +296,14 @@
     function openWedding() {
         document.getElementById("busta-container").classList.add("aperta");
         const audio = document.getElementById("audio");
-        audio.play().catch(e => console.log("Audio in attesa di interazione..."));
+        audio.play().catch(e => console.log("Audio in attesa..."));
         
         setTimeout(() => {
             const main = document.getElementById("main-content");
             main.style.visibility = "visible";
             main.style.opacity = "1";
             startTimer();
-        }, 1200);
+        }, 1500);
     }
 
     function startTimer() {
