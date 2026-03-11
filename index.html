@@ -25,6 +25,7 @@
             background: var(--perla); 
             color: var(--text); 
             overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased;
         }
 
         /* BUSTA ESTERNA */
@@ -49,12 +50,11 @@
             transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        /* BOLLINO INGRANDITO ULTERIORMENTE */
         .wax-img { 
             position: absolute; 
             top: 50%; left: 50%; 
             transform: translate(-50%, -50%); 
-            width: 195px; /* Ingrandito +10% rispetto a prima */
+            width: 195px;
             height: auto;
             cursor: pointer; 
             z-index: 20; 
@@ -63,19 +63,17 @@
 
         .aperta#busta-container { visibility: hidden; opacity: 0; transition: 1.8s; pointer-events: none; }
 
-        /* HERO - ANIMAZIONE MOVIMENTO LENTO */
+        /* HERO */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        
         .hero-img { 
             position: absolute; 
-            width: 120%; /* Più larga per permettere il movimento */
+            width: 130%; 
             height: 100%; 
             background: url("a.jpg") center top/cover no-repeat;
             z-index: 0; 
             opacity: 0.85; 
             animation: panImage 20s ease-in-out infinite alternate;
         }
-
         @keyframes panImage {
             0% { transform: translateX(-10%); }
             100% { transform: translateX(0%); }
@@ -85,7 +83,7 @@
             z-index: 2; width: 100%; 
             background: rgba(255, 255, 255, 0.35); 
             backdrop-filter: blur(4px); 
-            padding: 8px 0; /* Ancora più sottile e delicata */
+            padding: 8px 0;
             border-top: 0.5px solid rgba(212, 175, 55, 0.2); 
             border-bottom: 0.5px solid rgba(212, 175, 55, 0.2);
             text-align: center;
@@ -93,47 +91,66 @@
         .hero-banner h1 { font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--salvia-deep); margin: 0; font-weight: 400; }
 
         /* SEZIONI E LAYOUT */
-        .welcome-note { background: linear-gradient(to right, var(--perla), var(--arancio-seta), var(--perla)); color: var(--salvia-deep); padding: 60px 20px; text-align: center; font-family: 'Cormorant Garamond'; font-size: 1.6rem; letter-spacing: 2px; font-style: italic; }
-        section { padding: 80px 20px; text-align: center; }
+        .welcome-note { background: linear-gradient(to right, var(--perla), var(--arancio-seta), var(--perla)); color: var(--salvia-deep); padding: 50px 20px; text-align: center; font-family: 'Cormorant Garamond'; font-size: 1.4rem; letter-spacing: 2px; font-style: italic; }
+        section { padding: 60px 20px; text-align: center; }
         .container { max-width: 1000px; margin: auto; }
-        h2 { font-family: 'Cormorant Garamond'; font-size: 2.8rem; color: var(--salvia-deep); margin-bottom: 30px; }
-        .linea-oro { width: 60px; height: 1px; background: var(--oro-caldo); margin: 20px auto; }
+        h2 { font-family: 'Cormorant Garamond'; font-size: 2.4rem; color: var(--salvia-deep); margin-bottom: 20px; }
+        .linea-oro { width: 50px; height: 1px; background: var(--oro-caldo); margin: 15px auto; }
+        
         .bg-perla { background-color: var(--perla); }
         .bg-salvia { background-color: var(--salvia-bright); color: var(--salvia-deep); }
         .bg-arancio { background-color: var(--arancio-seta); }
         .bg-arancio-gradiente { background: linear-gradient(180deg, var(--perla) 0%, var(--arancio-seta) 50%, var(--perla) 100%); }
 
         /* COUNTDOWN */
-        .count-grid { display: flex; justify-content: center; gap: 15px; margin-top: 40px; flex-wrap: wrap; }
-        .count-item { width: 85px; padding: 15px; background: rgba(255,255,255,0.5); border: 1px solid white; border-radius: 2px; }
-        .count-item span { display: block; font-size: 2.2rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); }
-        .count-item label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
+        .count-grid { display: flex; justify-content: center; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+        .count-item { width: 75px; padding: 12px; background: rgba(255,255,255,0.5); border: 0.5px solid white; border-radius: 2px; }
+        .count-item span { display: block; font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); }
+        .count-item label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* CARTE INFO */
-        .info-card { background: white; padding: 60px 30px; box-shadow: 0 15px 50px rgba(0,0,0,0.03); position: relative; margin-bottom: 50px; }
-        .info-card::after { content: ""; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px solid var(--arancio-seta); pointer-events: none; }
-        .map-container { height: 350px; margin-top: 40px; border: 1px solid #eee; overflow: hidden; }
+        /* CARTE INFO E MAPPE LUXURY */
+        .info-card { background: white; padding: 40px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.02); position: relative; margin-bottom: 40px; border-radius: 2px; }
+        .info-card::after { content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; border: 0.5px solid var(--arancio-seta); pointer-events: none; }
+        
+        .map-container { 
+            height: 300px; 
+            margin: 30px -20px -40px -20px; /* Estende la mappa ai bordi della card su mobile */
+            overflow: hidden; 
+            filter: grayscale(0.2) contrast(0.9);
+            border-top: 1px solid var(--perla);
+        }
 
         /* SLIDER FOTO */
-        .slider-track { display: flex; width: calc(290px * 32); animation: scrollInfinite 60s linear infinite; }
-        .slider-track img { width: 270px; height: 360px; object-fit: cover; margin: 0 10px; border: 10px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-        @keyframes scrollInfinite { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-290px * 16)); } }
+        .slider-track { display: flex; width: calc(240px * 32); animation: scrollInfinite 60s linear infinite; }
+        .slider-track img { width: 220px; height: 300px; object-fit: cover; margin: 0 10px; border: 8px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        @keyframes scrollInfinite { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-240px * 16)); } }
 
         /* FAQ */
-        .faq-container { max-width: 750px; margin: 50px auto; text-align: left; }
-        .faq-item { margin-bottom: 20px; border-bottom: 1px solid var(--arancio-lux); background: white; padding: 10px; }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Cormorant Garamond'; font-size: 1.6rem; color: var(--salvia-deep); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; padding: 0 20px; font-size: 1rem; line-height: 1.8; color: #444; }
-        .faq-item.active .faq-answer { max-height: 400px; padding-bottom: 25px; }
+        .faq-container { max-width: 750px; margin: 30px auto; text-align: left; }
+        .faq-item { margin-bottom: 15px; border-bottom: 1px solid var(--arancio-lux); background: white; padding: 5px; }
+        .faq-question { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Cormorant Garamond'; font-size: 1.3rem; color: var(--salvia-deep); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 15px; font-size: 0.95rem; line-height: 1.6; color: #555; }
+        .faq-item.active .faq-answer { max-height: 500px; padding-bottom: 20px; }
 
-        /* RSVP E STORIA */
-        .form-container { max-width: 550px; margin: 50px auto 0; background: white; padding: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.03); }
-        .input-wedding { width: 100%; padding: 18px; margin-bottom: 25px; border: none; border-bottom: 1px solid var(--salvia-bright); font-family: 'Montserrat'; }
-        .btn-lux { background: var(--salvia-deep); color: white; padding: 22px; border: none; width: 100%; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; font-weight: 600; }
-        .storia-content { max-width: 850px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.3rem; line-height: 2; color: #3d3d3d; }
-        .storia-decor { text-align: center; font-size: 2.5rem; color: var(--oro-caldo); margin: 50px 0; opacity: 0.7; }
+        /* RSVP */
+        .form-container { max-width: 550px; margin: 30px auto 0; background: white; padding: 30px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .input-wedding { width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-bottom: 1px solid var(--salvia-bright); font-family: 'Montserrat'; font-size: 0.9rem; }
+        .btn-lux { background: var(--salvia-deep); color: white; padding: 18px; border: none; width: 100%; letter-spacing: 3px; cursor: pointer; text-transform: uppercase; font-weight: 600; font-size: 0.85rem; }
 
-        footer { padding: 80px 20px; background: white; border-top: 1px solid var(--arancio-seta); text-align: center; }
+        /* STORIA OTTIMIZZATA MOBILE */
+        .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.15rem; line-height: 1.8; color: #3d3d3d; hyphens: auto; }
+        .storia-decor { text-align: center; font-size: 2rem; color: var(--oro-caldo); margin: 40px 0; opacity: 0.6; }
+
+        footer { padding: 60px 20px; background: white; border-top: 1px solid var(--arancio-seta); text-align: center; }
+
+        /* MEDIA QUERY PER CELLULARI PICCOLI */
+        @media (max-width: 480px) {
+            .hero-banner h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+            .storia-content { font-size: 1.1rem; padding: 0 5px; }
+            .welcome-note { font-size: 1.2rem; padding: 40px 15px; }
+            .count-item { width: 68px; padding: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -153,7 +170,7 @@
         <div class="hero-img"></div>
         <div class="hero-banner">
             <h1 style="font-family: 'Great Vibes'; color: var(--salvia-deep); margin: 5px 0; font-weight: 400;">Chiara & Gregorio</h1>
-            <p style="font-style: italic; font-family: 'Cormorant Garamond'; font-size: 1.2rem;">"Una corda a tre capi non si rompe così presto" - ECCLESIASTE 4,12</p>
+            <p style="font-style: italic; font-family: 'Cormorant Garamond'; font-size: 1.1rem; margin: 0 10px;">"Una corda a tre capi non si rompe così presto" - ECCLESIASTE 4,12</p>
         </div>
     </section>
 
@@ -178,7 +195,7 @@
                 <div class="linea-oro"></div>
                 <p>Sabato 3 Ottobre alle ore 11:00</p>
                 <p><strong>Chiesa dei Santi Gervasio e Protasio Martiri</strong></p>
-                <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
+                <p style="font-size: 0.9rem;">Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.839601449547!2d12.235928076840693!3d45.57362362612268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477935f8d5e16597%3A0x6d9f0a9f5d1e4e0!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Santrovaso%20TV!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
@@ -194,7 +211,7 @@
                 <div class="linea-oro"></div>
                 <p>Dopo la cerimonia, festeggeremo insieme presso:</p>
                 <p><strong>Villa Luppis</strong></p>
-                <p>Via San Martino, 34 - 33087 Pasiano di Pordenone (PN)</p>
+                <p style="font-size: 0.9rem;">Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2787.876356740615!2d12.628833976846153!3d45.77364681347644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477bf2f567087271%3A0x4649c0d952618841!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
@@ -205,10 +222,10 @@
 
     <section class="bg-salvia">
         <div class="container">
-            <h2>Qualche sorriso e qualche smorfia</h2>
+            <h2>Sorrisi e smorfie</h2>
             <div class="linea-oro"></div>
         </div>
-        <div style="margin-top: 60px; overflow: hidden;">
+        <div style="margin-top: 40px; overflow: hidden;">
             <div class="slider-track">
                 <img src="b.jpg"> <img src="bb.jpg"> <img src="c.jpg"> <img src="d.jpg">
                 <img src="e.jpg"> <img src="f.jpg"> <img src="ff.jpg"> <img src="g.jpg">
@@ -227,11 +244,11 @@
             <div class="info-card">
                 <h2>Wedding Wishlist</h2>
                 <div class="linea-oro"></div>
-                <p>Il dono più grande che possiamo ricevere è la vostra presenza. Se desiderate contribuire al nostro futuro e alla nostra nuova casa, potete farlo qui:</p>
-                <div style="background: white; padding: 40px; border: 1px dashed var(--salvia-bright); margin-top: 30px; border-radius: 2px;">
-                    <p style="letter-spacing: 1px; font-size: 0.8rem; color: var(--oro-caldo);">IBAN intestato a TRONCHIN GREGORIO</p>
-                    <p style="font-size: 1.3rem; letter-spacing: 3px; color: var(--salvia-deep); font-weight: 500;">IT 00 X 00000 00000 000000000000</p>
-                    <p style="font-size: 0.9rem; font-style: italic;">Vi ringraziamo di cuore per il vostro pensiero</p>
+                <p style="font-size: 0.95rem;">Il dono più grande è la vostra presenza. Se desiderate contribuire al nostro futuro, potete farlo qui:</p>
+                <div style="background: white; padding: 30px 15px; border: 1px dashed var(--salvia-bright); margin-top: 25px; border-radius: 2px;">
+                    <p style="letter-spacing: 1px; font-size: 0.75rem; color: var(--oro-caldo); margin-bottom: 10px;">IBAN intestato a TRONCHIN GREGORIO</p>
+                    <p style="font-size: 1.1rem; letter-spacing: 2px; color: var(--salvia-deep); font-weight: 500; word-break: break-all;">IT 00 X 00000 00000 000000000000</p>
+                    <p style="font-size: 0.85rem; font-style: italic; margin-top: 15px;">Vi ringraziamo di cuore</p>
                 </div>
             </div>
         </div>
@@ -242,12 +259,12 @@
             <div class="info-card">
                 <h2>R.S.V.P.</h2>
                 <div class="linea-oro"></div>
-                <p>Per permetterci di organizzare la giornata al meglio, conferma la tua presenza entro il</p>
-                <p style="font-size: 1.6rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600;">30 Agosto 2026</p>
+                <p>Conferma la tua presenza entro il</p>
+                <p style="font-size: 1.4rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600;">30 Agosto 2026</p>
                 <div class="form-container">
                     <input type="text" placeholder="Nome e Cognome" class="input-wedding">
-                    <textarea rows="2" placeholder="Note per gli sposi" class="input-wedding"></textarea>
-                    <button class="btn-lux" onclick="alert('Grazie per la conferma!')">Invia RSVP</button>
+                    <textarea rows="2" placeholder="Note (Allergie, ecc)" class="input-wedding"></textarea>
+                    <button class="btn-lux" onclick="alert('Grazie per la conferma!')">Invia conferma</button>
                 </div>
             </div>
         </div>
@@ -255,20 +272,20 @@
 
     <section class="bg-arancio">
         <div class="container">
-            <h2>Domande Frequenti</h2>
+            <h2>FAQ</h2>
             <div class="linea-oro"></div>
             <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">Posso portare un accompagnatore?</div>
-                    <div class="faq-answer">Se ti fa piacere essere accompagnato da qualcuno, indicalo nella sezione delle note quando registri la tua presenza. Saremo noi sposi a contattarti personalmente per confermarti la presenza del tuo +1.</div>
+                    <div class="faq-question">Accompagnatori?</div>
+                    <div class="faq-answer">Se desideri essere accompagnato, indicalo nelle note. Ti contatteremo per confermare il +1.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">C'è parcheggio disponibile?</div>
-                    <div class="faq-answer">Certamente, la chiesa e la villa dispongono di un ampio parcheggio, non ti preoccupare!</div>
+                    <div class="faq-question">Parcheggio?</div>
+                    <div class="faq-answer">Sia la chiesa che la villa dispongono di ampi parcheggi privati.</div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-question">Che dress code devo seguire?</div>
-                    <div class="faq-answer">Elegante e formale. Evita il colore bianco, riservato alla sposa, e il colore arancione, riservato alle testimoni.</div>
+                    <div class="faq-question">Dress code?</div>
+                    <div class="faq-answer">Elegante. Evitare il bianco (sposa) e l'arancione (testimoni).</div>
                 </div>
             </div>
         </div>
@@ -299,7 +316,7 @@
     </section>
 
     <footer>
-        <h1 style="font-family: 'Great Vibes'; font-size: 3rem; color: var(--salvia-deep);">Chiara & Gregorio</h1>
+        <h1 style="font-family: 'Great Vibes'; font-size: 2.8rem; color: var(--salvia-deep);">Chiara & Gregorio</h1>
         <p>03.10.2026</p>
     </footer>
 
