@@ -29,7 +29,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- AUDIO CONTROL --- */
+        /* --- AUDIO CONTROL CON INDICAZIONE --- */
         #music-wrapper {
             position: fixed; top: 20px; right: 20px; z-index: 10001;
             display: none; align-items: center; gap: 10px;
@@ -140,8 +140,8 @@
             border-top: 1px solid var(--perla);
         }
 
-        /* SLIDER FOTO */
-        .slider-wrapper { overflow-x: auto; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; }
+        /* SLIDER FOTO - RIPRISTINATO SCORRIMENTO AUTOMATICO */
+        .slider-wrapper { overflow-x: auto; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
         .slider-wrapper::-webkit-scrollbar { display: none; }
         .slider-track { display: flex; width: max-content; animation: scrollInfinite 60s linear infinite; }
         .slider-track:hover { animation-play-state: paused; }
@@ -234,7 +234,7 @@
                 <p style="font-size: 0.9rem;">Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.0768928030614!2d12.2157302!3d45.5688461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47794b80b72be48b%3A0x633d71246f4948a!2sPiazza%20Diaz%2C%201%2C%2031022%20Sant&#39;Trovaso%20TV!5e0!3m2!1sit!2sit!4v1710180000000">
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.0768928030614!2d12.2157302!3d45.5688461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47794b80b72be48b%3A0x633d71246f4948a!2sPiazza%20Diaz%2C%201%2C%2031022%20Sant'Trovaso%20TV!5e0!3m2!1sit!2sit!4v1710180000000">
                     </iframe>
                 </div>
             </div>
@@ -286,7 +286,7 @@
                 <p style="font-size: 0.95rem;">Il dono più grande è la vostra presenza. Se desiderate contribuire al nostro futuro, potete farlo qui:</p>
                 <div style="background: white; padding: 40px 15px; border: 1px dashed var(--oro-caldo); margin-top: 25px; border-radius: 2px;">
                     <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--oro-caldo); margin-bottom: 10px; text-transform: uppercase;">IBAN intestato a TRONCHIN GREGORIO</p>
-                    <p id="iban-text" style="font-size: 0.85rem; letter-spacing: 0.5px; color: var(--salvia-deep); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">IT 00 X 00000 00000 000000000000</p>
+                    <p id="iban-text" style="font-size: 0.85rem; letter-spacing: 0.5px; color: var(--salvia-deep); font-weight: 600; white-space: nowrap; overflow: hidden;">IT 00 X 00000 00000 000000000000</p>
                     <button class="copy-btn" onclick="copyIban()">Copia IBAN</button>
                     <p style="font-size: 0.9rem; font-style: italic; margin-top: 15px;">Vi ringraziamo di cuore</p>
                 </div>
