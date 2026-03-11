@@ -25,31 +25,6 @@
             background: var(--perla); 
             color: var(--text); 
             overflow-x: hidden; 
-            position: relative;
-        }
-
-        /* IL FILO INVISIBILE */
-        .invisible-thread {
-            position: absolute;
-            top: 100vh;
-            left: 50%;
-            width: 1px;
-            height: calc(100% - 100vh);
-            background: linear-gradient(to bottom, transparent, var(--oro-caldo), transparent);
-            opacity: 0.3;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* ANIMAZIONE TRANSIZIONE INGRESSO */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1.2s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* BUSTA ESTERNA */
@@ -59,61 +34,90 @@
             z-index: 9999; perspective: 2000px;
         }
         .envelope-wrapper {
-            position: relative; width: 100vw; height: 100vh;
-            display: flex; justify-content: center; align-items: center; overflow: hidden;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
-        .envelope-img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1); }
+        .envelope-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+        }
 
-        /* BOLLINO */
+        /* BOLLINO INGRANDITO ULTERIORMENTE */
         .wax-img { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            width: 195px; height: auto; cursor: pointer; z-index: 20; 
+            position: absolute; 
+            top: 50%; left: 50%; 
+            transform: translate(-50%, -50%); 
+            width: 195px; /* Ingrandito +10% rispetto a prima */
+            height: auto;
+            cursor: pointer; 
+            z-index: 20; 
             filter: drop-shadow(0 10px 25px rgba(0,0,0,0.18));
         }
 
         .aperta#busta-container { visibility: hidden; opacity: 0; transition: 1.8s; pointer-events: none; }
 
-        /* HERO */
+        /* HERO - ANIMAZIONE MOVIMENTO LENTO */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        
         .hero-img { 
-            position: absolute; width: 120%; height: 100%; 
+            position: absolute; 
+            width: 120%; /* Più larga per permettere il movimento */
+            height: 100%; 
             background: url("a.jpg") center top/cover no-repeat;
-            z-index: 0; opacity: 0.85; 
+            z-index: 0; 
+            opacity: 0.85; 
             animation: panImage 20s ease-in-out infinite alternate;
         }
-        @keyframes panImage { 0% { transform: translateX(-10%); } 100% { transform: translateX(0%); } }
+
+        @keyframes panImage {
+            0% { transform: translateX(-10%); }
+            100% { transform: translateX(0%); }
+        }
 
         .hero-banner {
-            z-index: 2; width: 100%; background: rgba(255, 255, 255, 0.35); 
-            backdrop-filter: blur(4px); padding: 8px 0; text-align: center;
-            border-top: 0.5px solid rgba(212, 175, 55, 0.2); border-bottom: 0.5px solid rgba(212, 175, 55, 0.2);
+            z-index: 2; width: 100%; 
+            background: rgba(255, 255, 255, 0.35); 
+            backdrop-filter: blur(4px); 
+            padding: 8px 0; /* Ancora più sottile e delicata */
+            border-top: 0.5px solid rgba(212, 175, 55, 0.2); 
+            border-bottom: 0.5px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
         }
         .hero-banner h1 { font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--salvia-deep); margin: 0; font-weight: 400; }
 
-        /* LAYOUT SEZIONI */
-        .welcome-note { background: linear-gradient(to right, var(--perla), var(--arancio-seta), var(--perla)); color: var(--salvia-deep); padding: 60px 20px; text-align: center; font-family: 'Cormorant Garamond'; font-size: 1.6rem; letter-spacing: 2px; font-style: italic; position: relative; z-index: 2; }
-        section { padding: 80px 20px; text-align: center; position: relative; z-index: 2; }
+        /* SEZIONI E LAYOUT */
+        .welcome-note { background: linear-gradient(to right, var(--perla), var(--arancio-seta), var(--perla)); color: var(--salvia-deep); padding: 60px 20px; text-align: center; font-family: 'Cormorant Garamond'; font-size: 1.6rem; letter-spacing: 2px; font-style: italic; }
+        section { padding: 80px 20px; text-align: center; }
         .container { max-width: 1000px; margin: auto; }
         h2 { font-family: 'Cormorant Garamond'; font-size: 2.8rem; color: var(--salvia-deep); margin-bottom: 30px; }
         .linea-oro { width: 60px; height: 1px; background: var(--oro-caldo); margin: 20px auto; }
-        
         .bg-perla { background-color: var(--perla); }
         .bg-salvia { background-color: var(--salvia-bright); color: var(--salvia-deep); }
         .bg-arancio { background-color: var(--arancio-seta); }
         .bg-arancio-gradiente { background: linear-gradient(180deg, var(--perla) 0%, var(--arancio-seta) 50%, var(--perla) 100%); }
 
-        /* CARTE E MAPPE */
+        /* COUNTDOWN */
+        .count-grid { display: flex; justify-content: center; gap: 15px; margin-top: 40px; flex-wrap: wrap; }
+        .count-item { width: 85px; padding: 15px; background: rgba(255,255,255,0.5); border: 1px solid white; border-radius: 2px; }
+        .count-item span { display: block; font-size: 2.2rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); }
+        .count-item label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* CARTE INFO */
         .info-card { background: white; padding: 60px 30px; box-shadow: 0 15px 50px rgba(0,0,0,0.03); position: relative; margin-bottom: 50px; }
         .info-card::after { content: ""; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border: 1px solid var(--arancio-seta); pointer-events: none; }
         .map-container { height: 350px; margin-top: 40px; border: 1px solid #eee; overflow: hidden; }
 
-        /* IBAN COPIA */
-        .iban-box { background: white; padding: 40px; border: 1px dashed var(--salvia-bright); margin-top: 30px; position: relative; }
-        .copy-btn { 
-            background: var(--salvia-deep); color: white; border: none; padding: 8px 15px; 
-            font-size: 0.7rem; cursor: pointer; margin-top: 15px; letter-spacing: 1px; transition: 0.3s;
-        }
-        .copy-btn:hover { background: var(--oro-caldo); }
+        /* SLIDER FOTO */
+        .slider-track { display: flex; width: calc(290px * 32); animation: scrollInfinite 60s linear infinite; }
+        .slider-track img { width: 270px; height: 360px; object-fit: cover; margin: 0 10px; border: 10px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+        @keyframes scrollInfinite { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-290px * 16)); } }
 
         /* FAQ */
         .faq-container { max-width: 750px; margin: 50px auto; text-align: left; }
@@ -122,25 +126,14 @@
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; padding: 0 20px; font-size: 1rem; line-height: 1.8; color: #444; }
         .faq-item.active .faq-answer { max-height: 400px; padding-bottom: 25px; }
 
-        /* RSVP */
+        /* RSVP E STORIA */
         .form-container { max-width: 550px; margin: 50px auto 0; background: white; padding: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.03); }
         .input-wedding { width: 100%; padding: 18px; margin-bottom: 25px; border: none; border-bottom: 1px solid var(--salvia-bright); font-family: 'Montserrat'; }
         .btn-lux { background: var(--salvia-deep); color: white; padding: 22px; border: none; width: 100%; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; font-weight: 600; }
-
-        /* STORIA */
         .storia-content { max-width: 850px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.3rem; line-height: 2; color: #3d3d3d; }
-        
+        .storia-decor { text-align: center; font-size: 2.5rem; color: var(--oro-caldo); margin: 50px 0; opacity: 0.7; }
+
         footer { padding: 80px 20px; background: white; border-top: 1px solid var(--arancio-seta); text-align: center; }
-
-        /* COUNTDOWN */
-        .count-grid { display: flex; justify-content: center; gap: 15px; margin-top: 40px; flex-wrap: wrap; }
-        .count-item { width: 85px; padding: 15px; background: rgba(255,255,255,0.5); border: 1px solid white; border-radius: 2px; }
-        .count-item span { display: block; font-size: 2.2rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); }
-
-        /* SLIDER */
-        .slider-track { display: flex; width: calc(290px * 32); animation: scrollInfinite 60s linear infinite; }
-        .slider-track img { width: 270px; height: 360px; object-fit: cover; margin: 0 10px; border: 10px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-        @keyframes scrollInfinite { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-290px * 16)); } }
     </style>
 </head>
 <body>
@@ -151,8 +144,6 @@
         <img src="bollino.png" class="wax-img" onclick="openWedding()">
     </div>
 </div>
-
-<div class="invisible-thread"></div>
 
 <audio id="audio" loop><source src="alex-productions-musica-romantica-per-matrimoni-e-san-valentino-amore(chosic.com).mp3" type="audio/mpeg"></audio>
 
@@ -168,7 +159,7 @@
 
     <div class="welcome-note">Scriviamo insieme un nuovo capitolo della nostra storia</div>
 
-    <section class="bg-salvia reveal">
+    <section class="bg-salvia">
         <div class="container">
             <h2>L'attesa termina tra:</h2>
             <div class="count-grid">
@@ -180,7 +171,7 @@
         </div>
     </section>
 
-    <section class="bg-perla reveal">
+    <section class="bg-perla">
         <div class="container">
             <div class="info-card">
                 <h2>La Cerimonia</h2>
@@ -190,13 +181,13 @@
                 <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2787.0543209581895!2d12.235546276856012!3d45.68971031735748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47794931a3962b31%3A0xc3f58a9e64e5c54!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Santrovaso%20TV!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2792.839601449547!2d12.235928076840693!3d45.57362362612268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477935f8d5e16597%3A0x6d9f0a9f5d1e4e0!2sPiazza%20Armando%20Diaz%2C%201%2C%2031022%20Santrovaso%20TV!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-arancio reveal">
+    <section class="bg-arancio">
         <div class="container">
             <div class="info-card" style="border-top: 5px solid var(--arancio-lux);">
                 <h2>Il Ricevimento</h2>
@@ -206,13 +197,13 @@
                 <p>Via San Martino, 34 - 33087 Pasiano di Pordenone (PN)</p>
                 <div class="map-container">
                     <iframe width="100%" height="100%" frameborder="0" style="border:0" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.654!2d12.634!3d45.845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477be79e60601933%3A0x6b8408470a6c0f3d!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1700000000001" allowfullscreen></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2787.876356740615!2d12.628833976846153!3d45.77364681347644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477bf2f567087271%3A0x4649c0d952618841!2sVilla%20Luppis!5e0!3m2!1sit!2sit!4v1700000000000" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-salvia reveal">
+    <section class="bg-salvia">
         <div class="container">
             <h2>Qualche sorriso e qualche smorfia</h2>
             <div class="linea-oro"></div>
@@ -231,23 +222,22 @@
         </div>
     </section>
 
-    <section class="bg-perla reveal">
+    <section class="bg-perla">
         <div class="container">
             <div class="info-card">
                 <h2>Wedding Wishlist</h2>
                 <div class="linea-oro"></div>
                 <p>Il dono più grande che possiamo ricevere è la vostra presenza. Se desiderate contribuire al nostro futuro e alla nostra nuova casa, potete farlo qui:</p>
-                <div class="iban-box">
+                <div style="background: white; padding: 40px; border: 1px dashed var(--salvia-bright); margin-top: 30px; border-radius: 2px;">
                     <p style="letter-spacing: 1px; font-size: 0.8rem; color: var(--oro-caldo);">IBAN intestato a TRONCHIN GREGORIO</p>
-                    <p id="iban-text" style="font-size: 1.3rem; letter-spacing: 3px; color: var(--salvia-deep); font-weight: 500;">IT 00 X 00000 00000 000000000000</p>
-                    <button class="copy-btn" onclick="copyIban()">COPIA IBAN</button>
-                    <p style="font-size: 0.9rem; font-style: italic; margin-top: 20px;">Vi ringraziamo di cuore per il vostro pensiero</p>
+                    <p style="font-size: 1.3rem; letter-spacing: 3px; color: var(--salvia-deep); font-weight: 500;">IT 00 X 00000 00000 000000000000</p>
+                    <p style="font-size: 0.9rem; font-style: italic;">Vi ringraziamo di cuore per il vostro pensiero</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-salvia reveal">
+    <section class="bg-salvia">
         <div class="container">
             <div class="info-card">
                 <h2>R.S.V.P.</h2>
@@ -263,7 +253,7 @@
         </div>
     </section>
 
-    <section class="bg-arancio reveal">
+    <section class="bg-arancio">
         <div class="container">
             <h2>Domande Frequenti</h2>
             <div class="linea-oro"></div>
@@ -284,11 +274,11 @@
         </div>
     </section>
 
-    <section class="section-storia bg-arancio-gradiente reveal">
+    <section class="section-storia bg-arancio-gradiente">
         <div class="container">
             <div class="storia-content">
                 <h2 style="text-align: center;">La nostra Storia</h2>
-                <div class="storia-decor" style="text-align: center; font-size: 2.5rem; color: var(--oro-caldo); margin: 50px 0; opacity: 0.7;">~ ❦ ~</div>
+                <div class="storia-decor">~ ❦ ~</div>
                 <p>C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita.</p>
                 <p>A dire il vero, la loro storia aveva inizio molto prima della loro nascita in un intrico di parentele che li legava come rami di un unico albero: Nello specifico Marta, la mamma della ragazza e Simone, il padre del ragazzo, erano cugini di terzo grado. Il che rendeva i protagonisti, cugini di quinto grado.</p>
                 <p>Abitando nello stesso piccolo paese, sin da piccoli, i due frequentarono la stessa classe della scuola materna dove emersero subito le loro personalità: Lei, una bambina delicata dagli occhi grandi e brillanti, amava la tranquillità e trascorreva ore all'aperto, raccogliendo pigne e legnetti per dare vita a piccole creature fantastiche. Le piaceva passare le giornate perdendosi tra le pagine dei suoi amati libri e tra i colori sgargianti dei suoi disegni. Lui invece, era un piccolo uragano di energia, sempre pronto a nuove avventure e a coinvolgere tutti i suoi amici in frenetiche partite a pallone. Pieno di vitalità correva, saltava, ed era sempre tutto rosso in faccia per l’agitazione.</p>
@@ -303,7 +293,7 @@
                 <p>Ripresero a scriversi e le loro conversazioni, all'inizio ancora impacciate, si trasformarono in lunghe chiacchierate, piene di risate e confidenze e, quello, fu il punto di partenza della loro storia infinita. Negli anni, Chiara, con la sua delicatezza, seppe sciogliere il nodo che stringeva il cuore di Gregorio, aiutandolo ad esprimere le emozioni che aveva da sempre tenuto prigioniere dentro di sé. Lo aiutò a cogliere la bellezza nelle piccole cose e fu in grado di spronarlo a sognare in grande, credendo in lui ancora prima che lui potesse farlo per se stesso. Gregorio, con la sua pazienza, curò le insicurezze di Chiara rendendola una donna forte e determinata. Ammirava ogni suo passo infondendole il coraggio di far sentire la sua voce e di affermare se stessa. Le fece capire che non per forza il bicchiere è sempre mezzo vuoto. La fece ridere portandole la luce anche nei momenti più bui e la protesse sempre, offrendole un luogo sicuro dove potersi rifugiare. Ogni giorno era un’avventura da condividere, un nuovo ricordo da creare. Costruirono mattone dopo mattone un amore autentico, fatto di affinità e sintonia.</p>
                 <p>Non fu sempre tutto rose e fiori ma ciò che ha importanza è che nelle loro dure battaglie crebbero insieme, migliorandosi a vicenda giorno dopo giorno. Dal non trovare un senso da dare alla propria vita, al trovarlo l’uno nell’altra. Dal non sapere niente sul proprio futuro, al realizzare che comunque, avrebbero desiderato passarlo insieme. Questa è la loro storia, la storia di due persone che grazie a Dio si sono trovate, scelte e amate e che insieme, come hanno sempre fatto, sono pronte a scrivere un nuovo capitolo della loro vita.</p>
                 <p>Oggi, mentre si preparano a pronunciare il fatidico "sì”, Chiara e Gregorio guardano indietro con nostalgia e gratitudine. E mentre si stringono la mano con un sorriso che dice più di mille parole, sentono ancora il battito accelerato del cuore al pensiero che il disegno che il Signore ha creato per loro è stato perfetto, unendoli sin dall’inizio dei tempi. Dio in questo loro percorso è stato ed è tuttora fondamentale, come se fosse il tessuto prezioso che tramite il filo dell’amore, ha dato vita alla loro storia in un ricamo meravigliosamente perfetto, come solo ed esclusivamente lui avrebbe mai potuto fare. E’ stato la loro stella polare, li ha guidati come un faro verso la luce della propria vocazione. Vocazione che oggi, porta con sé un nome ed un cognome: Chiara Vincenzi per lui e Gregorio Tronchin per lei.</p>
-                <div class="storia-decor" style="text-align: center; font-size: 2.5rem; color: var(--oro-caldo); margin: 50px 0; opacity: 0.7;">~ ❦ ~</div>
+                <div class="storia-decor">~ ❦ ~</div>
             </div>
         </div>
     </section>
@@ -324,33 +314,7 @@
             main.style.visibility = "visible";
             main.style.opacity = "1";
             startTimer();
-            revealSections();
         }, 1200);
-    }
-
-    // GESTIONE REVEAL SEZIONI ALLO SCROLL
-    function revealSections() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(section => {
-            observer.observe(section);
-        });
-    }
-
-    // COPIA IBAN
-    function copyIban() {
-        const iban = document.getElementById("iban-text").innerText;
-        navigator.clipboard.writeText(iban).then(() => {
-            const btn = document.querySelector(".copy-btn");
-            btn.innerText = "COPIATO!";
-            setTimeout(() => { btn.innerText = "COPIA IBAN"; }, 2000);
-        });
     }
 
     function startTimer() {
