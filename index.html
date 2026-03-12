@@ -439,28 +439,18 @@ function copyIban() {
             document.getElementById("icon-pause").style.display = "none";
         }
     }
+// Slider controls
 
- // Slider controls - Loop Infinito
     const wrapper = document.querySelector('.slider-wrapper');
-    const track = document.getElementById('slider-track');
 
-    // Funzione per garantire il loop fluido
-    function handleLoop() {
-        const scrollLeft = wrapper.scrollLeft;
-        const halfWidth = track.scrollWidth / 2;
-
-        if (scrollLeft >= halfWidth) {
-            wrapper.scrollLeft = 0;
-        } else if (scrollLeft <= 0) {
-            wrapper.scrollLeft = halfWidth;
-        }
-    }
-
-    // Eventi per fermare/far ripartire l'animazione al tocco/mouse
-    wrapper.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
-    wrapper.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
     wrapper.addEventListener('touchstart', () => track.style.animationPlayState = 'paused');
+
     wrapper.addEventListener('touchend', () => track.style.animationPlayState = 'running');
+
+    wrapper.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+
+    wrapper.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+
 
     function copyIban() {
         const iban = document.getElementById("iban-text").innerText;
