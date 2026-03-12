@@ -145,18 +145,17 @@
             overflow: hidden; filter: sepia(0.2) contrast(0.9);
             border-top: 1px solid var(--perla);
         }
-
-       /* SLIDER FOTO - SCORRIMENTO AUTOMATICO */
+/* SLIDER FOTO INTERATTIVO */
 .slider-wrapper { 
     overflow: hidden; 
     padding: 20px 0; 
     width: 100%;
+    cursor: grab;
+    touch-action: pan-y; /* Permette lo scroll della pagina ma non quello laterale del browser */
 }
-.slider-wrapper::-webkit-scrollbar { display: none; }
 .slider-track { 
     display: flex; 
     width: max-content; 
-    animation: scrollInfinite 60s linear infinite; 
 }
 .slider-track img { 
     width: 220px; 
@@ -166,10 +165,6 @@
     border: 10px solid white; 
     box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
     pointer-events: none; 
-}
-@keyframes scrollInfinite { 
-    0% { transform: translateX(0); } 
-    100% { transform: translateX(-50%); } 
 }
 
         /* FAQ */
@@ -455,18 +450,60 @@ function copyIban() {
             document.getElementById("icon-pause").style.display = "none";
         }
     }
-// Slider controls
+// --- LOGICA SLIDER INTERATTIVO ---
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const sliderTrack = document.getElementById('slider-track');
+    let isDragging = false;
+    let startX, scrollLeft;
+    let currentX = 0;
+    let speed = 0.8; // Velocità: più basso è, più è lento
 
-    const wrapper = document.querySelector('.slider-wrapper');
+    function autoScroll() {
+        if (!isDragging) {
+            currentX -= speed;
+            if (Math.abs(currentX) >= sliderTrack.scrollWidth / 2) {
+                currentX = 0;
+            }
+            sliderTrack.style.transform = `translateX(${currentX}px)`;
+        }
+        requestAnimationFrame(autoScroll);
+    }
 
-    wrapper.addEventListener('touchstart', () => track.style.animationPlayState = 'paused');
+    sliderWrapper.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.pageX - currentX;
+    });
 
-    wrapper.addEventListener('touchend', () => track.style.animationPlayState = 'running');
+    sliderWrapper.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        startX = e.touches[0].pageX - currentX;
+    });
 
-    wrapper.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        currentX = e.pageX - startX;
+        checkBounds();
+        sliderTrack.style.transform = `translateX(${currentX}px)`;
+    });
 
-    wrapper.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+    window.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        currentX = e.touches[0].pageX - startX;
+        checkBounds();
+        sliderTrack.style.transform = `translateX(${currentX}px)`;
+    });
 
+    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('touchend', () => isDragging = false);
+
+    function checkBounds() {
+        const half = sliderTrack.scrollWidth / 2;
+        if (currentX > 0) currentX = -half;
+        if (Math.abs(currentX) >= half) currentX = 0;
+    }
+
+    autoScroll();
+    // --- FINE LOGICA SLIDER ---
 
     function copyIban() {
         const iban = document.getElementById("iban-text").innerText;
