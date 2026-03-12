@@ -286,19 +286,40 @@
             </div>
         </div>
     </section>
-
-    <section class="bg-perla">
+<section class="bg-perla">
         <div class="container">
             <div class="info-card">
                 <h2>Wedding Wishlist</h2>
                 <div class="linea-oro"></div>
-                <p style="font-size: 0.95rem;">Il dono più grande che possiamo ricevere è la vostra presenza. Ma se desiderate contribuire a rendere il progetto della nostra casa più solido, il vostro pensiero sarà per noi un mattoncino in più per la cotruzione del nostro futuro, dove speriamo di potervi accogliere al più presto.</p>
-                <div style="background: white; padding: 40px 15px; border: 1px dashed var(--oro-caldo); margin-top: 25px;">
+                <p style="font-size: 0.95rem; margin-bottom: 10px;">Il dono più grande che possiamo ricevere è la vostra presenza.</p>
+                <p style="font-size: 0.95rem;">Ma se desiderate contribuire a rendere il progetto della nostra casa più solido, il vostro pensiero sarà per noi un mattoncino in più per la cotruzione del nostro futuro, dove speriamo di potervi accogliere al più presto.</p>
+                <div style="background: white; padding: 40px 15px; border: 1px dashed var(--oro-caldo); margin-top: 25px; position: relative;">
                     <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--oro-caldo); margin-bottom: 10px; text-transform: uppercase;">IBAN intestato a TRONCHIN GREGORIO</p>
                     <p id="iban-text" style="font-size: 0.85rem; letter-spacing: 0.5px; color: var(--salvia-deep); font-weight: 600; white-space: nowrap; overflow: hidden;">IT 00 X 00000 00000 000000000000</p>
-                    <p style="font-weight: bold; font-style: italic; font-family: 'serif'; font-size: 1.1rem; margin: 15px 0; color: var(--salvia-deep);">Grazie di cuore</p>
+                    <p style="font-weight: bold; font-style: italic; font-family: serif; font-size: 1.1rem; margin: 15px 0; color: #ffb07c;">Grazie di cuore</p>
                     <button class="copy-btn" onclick="copyIban()">Copia IBAN</button>
+                    
+                    <div id="copy-banner" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.95); width: 100%; height: 100%; align-items: center; justify-content: center; flex-direction: column; border-radius: 8px; z-index: 10;">
+                        <span style="font-size: 50px; color: #ffb07c;">❤️</span>
+                        <p style="font-weight: bold; color: var(--salvia-deep); margin-top: 10px;">IBAN copiato!</p>
+                    </div>
                 </div>
+            </div>
+        </div>
+</section>
+
+<script>
+function copyIban() {
+    const ibanText = document.getElementById('iban-text').innerText;
+    navigator.clipboard.writeText(ibanText).then(() => {
+        const banner = document.getElementById('copy-banner');
+        banner.style.display = 'flex';
+        setTimeout(() => {
+            banner.style.display = 'none';
+        }, 2000);
+    });
+}
+</script>
             </div>
         </div>
 </section>
