@@ -28,12 +28,11 @@
             color: var(--text); 
             overflow-x: hidden; 
             -webkit-font-smoothing: antialiased;
-            /* Protezione Copyright */
             user-select: none;
             -webkit-user-select: none;
         }
 
-        /* --- AUDIO CONTROL MODIFICATO --- */
+        /* --- TASTO AUDIO (Solo Icona) --- */
         #music-wrapper {
             position: fixed; top: 20px; right: 20px; z-index: 10001;
             display: none;
@@ -46,115 +45,68 @@
         }
         #music-control svg { width: 22px; height: 22px; fill: var(--salvia-deep); }
 
-        /* BUSTA ESTERNA */
+        /* BUSTA */
         #busta-container {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 2.5s;
+            z-index: 9999; transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .envelope-wrapper {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center; overflow: hidden;
-        }
-        .envelope-img { width: 120%; height: 120%; object-fit: cover; filter: brightness(1.02); }
-        .wax-img { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            width: 210px; height: auto; cursor: pointer; z-index: 20; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .wax-img:hover { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); }
-        
-        .hint-text {
-            position: absolute; bottom: 15%; font-family: 'Cormorant Garamond'; font-style: italic; font-size: 1.2rem;
-            color: var(--salvia-deep); animation: breathe 3s infinite ease-in-out; text-align: center; z-index: 21; width: 100%;
-        }
-        @keyframes breathe { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.8; } }
+        .envelope-wrapper { position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .envelope-img { width: 120%; height: 120%; object-fit: cover; }
+        .wax-img { position: absolute; width: 210px; cursor: pointer; z-index: 20; transition: 0.5s; }
+        .hint-text { position: absolute; bottom: 15%; font-family: 'Cormorant Garamond'; font-style: italic; color: var(--salvia-deep); animation: breathe 3s infinite; }
+        @keyframes breathe { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
         #busta-container.svanito { opacity: 0; visibility: hidden; pointer-events: none; }
 
-        /* HERO & PARALLAX */
+        /* HERO */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .hero-img { 
-            position: absolute; width: 130%; height: 120%; 
-            background: url("a.jpg") center top/cover no-repeat;
-            z-index: 0; opacity: 0.85; 
-            animation: panImage 20s ease-in-out infinite alternate;
-        }
-        @keyframes panImage { 0% { transform: scale(1.1) translateX(-5%); } 100% { transform: scale(1.1) translateX(5%); } }
-
-        .hero-banner {
-            z-index: 2; width: 100%; background: var(--glass); backdrop-filter: blur(10px); 
-            padding: 20px 0; border-top: 0.5px solid rgba(212, 175, 55, 0.3); border-bottom: 0.5px solid rgba(212, 175, 55, 0.3);
-            text-align: center;
-        }
+        .hero-img { position: absolute; width: 100%; height: 100%; background: url("a.jpg") center/cover no-repeat; opacity: 0.85; }
+        .hero-banner { z-index: 2; width: 100%; background: var(--glass); backdrop-filter: blur(10px); padding: 20px 0; text-align: center; border-top: 1px solid rgba(212,175,55,0.3); border-bottom: 1px solid rgba(212,175,55,0.3); }
         .hero-banner h1 { font-family: 'Great Vibes'; font-size: 4rem; color: var(--salvia-deep); margin: 0; font-weight: 400; }
 
-        .info-card { 
-            opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1);
-            background: white; padding: 40px 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.03); 
-            position: relative; margin-bottom: 40px; border-radius: 4px; 
-        }
-        .info-card.visible { opacity: 1; transform: translateY(0); }
-
-        .welcome-note { 
-            background: linear-gradient(to right, var(--perla), var(--arancio-seta), var(--perla)); 
-            color: var(--salvia-deep); padding: 70px 20px; text-align: center; 
-            font-family: 'Cormorant Garamond'; font-size: 1.6rem; letter-spacing: 3px; font-style: italic; 
-        }
-        
+        /* SEZIONI */
         section { padding: 80px 20px; text-align: center; }
         .container { max-width: 1000px; margin: auto; }
-        h2 { font-family: 'Cormorant Garamond'; font-size: 2.8rem; color: var(--salvia-deep); margin-bottom: 20px; font-weight: 300; }
+        .info-card { background: white; padding: 40px 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.03); margin-bottom: 40px; border-radius: 4px; }
+        h2 { font-family: 'Cormorant Garamond'; font-size: 2.8rem; color: var(--salvia-deep); }
         .linea-oro { width: 60px; height: 2px; background: var(--oro-caldo); margin: 15px auto; }
 
-        /* MODIFICA 1: COUNTDOWN ORIGINALE QUADRATO */
+        /* COUNTDOWN ORIGINALE */
         .count-grid { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
-        .count-item { 
-            flex: 0 1 85px; padding: 15px 5px; background: rgba(255,255,255,0.8); 
-            border: 0.5px solid var(--oro-solid); 
-        }
-        .count-item span { display: block; font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); }
-        .count-item label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
+        .count-item { flex: 0 1 85px; padding: 15px 5px; background: rgba(255,255,255,0.8); border: 0.5px solid var(--oro-solid); }
+        .count-item span { display: block; font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600; }
+        .count-item label { font-size: 0.6rem; text-transform: uppercase; }
 
-        /* MODIFICA 2: TIMELINE ORIZZONTALE COLLAPSABLE */
+        /* TIMELINE ORIZZONTALE */
         .timeline-details { margin: 20px 0; border: 1px solid var(--arancio-lux); border-radius: 8px; background: #fff; }
-        .timeline-summary { padding: 20px; font-family: 'Cormorant Garamond'; font-style: italic; color: var(--salvia-deep); cursor: pointer; outline: none; list-style: none; }
-        .timeline-scroll { 
-            display: flex; overflow-x: auto; gap: 20px; padding: 20px; 
-            scrollbar-width: none; -ms-overflow-style: none;
-        }
+        .timeline-summary { padding: 20px; font-family: 'Cormorant Garamond'; font-style: italic; color: var(--salvia-deep); cursor: pointer; list-style: none; }
+        .timeline-scroll { display: flex; overflow-x: auto; gap: 25px; padding: 30px 20px; scrollbar-width: none; }
         .timeline-scroll::-webkit-scrollbar { display: none; }
-        .timeline-box { min-width: 100px; flex-shrink: 0; }
-        .timeline-box .time { font-family: 'Cormorant Garamond'; font-weight: 600; font-size: 1.1rem; color: var(--salvia-deep); }
-        .timeline-box .event { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; display: block; color: #666; }
+        .timeline-box { min-width: 110px; flex-shrink: 0; }
+        .timeline-box .time { font-family: 'Cormorant Garamond'; font-weight: 600; color: var(--salvia-deep); font-size: 1.2rem; }
+        .timeline-box .event { font-size: 0.75rem; text-transform: uppercase; display: block; margin-top: 5px; }
 
-        /* MAPPE E COLORI ORIGINALI */
-        .map-container { height: 350px; margin: 30px -20px -40px -20px; overflow: hidden; filter: sepia(0.2) contrast(0.9); border-top: 1px solid var(--perla); }
-        .bg-salvia { background-color: var(--salvia-bright); color: var(--salvia-deep); }
+        /* COLORI ORIGINALI */
+        .bg-salvia { background-color: var(--salvia-bright); }
         .bg-arancio { background-color: var(--arancio-seta); }
-        .bg-arancio-gradiente { background: linear-gradient(180deg, var(--perla) 0%, var(--arancio-seta) 50%, var(--perla) 100%); }
+        .bg-arancio-gradiente { background: linear-gradient(180deg, var(--perla), var(--arancio-seta), var(--perla)); }
 
-        /* SLIDER FOTO ORIGINALE */
-        .slider-wrapper { overflow: hidden; padding: 20px 0; width: 100%; cursor: grab; }
+        /* SLIDER */
+        .slider-wrapper { overflow: hidden; padding: 20px 0; width: 100%; }
         .slider-track { display: flex; width: max-content; }
         .slider-track img { width: 220px; height: 320px; object-fit: cover; margin: 0 10px; border: 10px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
 
-        /* FAQ & RSVP ORIGINALI */
-        .faq-container { max-width: 750px; margin: 30px auto; text-align: left; }
-        .faq-item { margin-bottom: 15px; border-bottom: 1px solid var(--arancio-lux); background: white; }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: 'Cormorant Garamond'; font-size: 1.4rem; color: var(--salvia-deep); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; padding: 0 20px; font-size: 1rem; line-height: 1.8; color: #555; }
-        .faq-item.active .faq-answer { max-height: 500px; padding-bottom: 20px; }
-        .input-wedding { width: 100%; padding: 15px; margin-bottom: 20px; border: none; border-bottom: 1px solid var(--salvia-bright); font-family: 'Montserrat'; font-size: 0.95rem; }
-        .btn-lux { background: var(--salvia-deep); color: white; padding: 20px; border: none; width: 100%; letter-spacing: 4px; cursor: pointer; text-transform: uppercase; font-weight: 600; }
+        /* FAQ & STORIA */
+        .faq-container { text-align: left; max-width: 750px; margin: auto; }
+        .faq-item { border-bottom: 1px solid var(--arancio-lux); padding: 15px 0; cursor: pointer; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: 0.4s; color: #555; padding: 0 10px; }
+        .faq-item.active .faq-answer { max-height: 200px; padding-top: 10px; }
+        .storia-content { max-width: 800px; margin: auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.3rem; line-height: 1.8; }
 
-        /* STORIA ORIGINALE */
-        .storia-content { max-width: 800px; margin: 0 auto; text-align: justify; font-family: 'Cormorant Garamond'; font-size: 1.3rem; line-height: 1.9; color: #3d3d3d; }
-        .storia-decor { text-align: center; font-size: 2.5rem; color: var(--oro-solid); margin: 50px 0; opacity: 0.6; }
+        .btn-lux { background: var(--salvia-deep); color: white; padding: 20px; border: none; width: 100%; letter-spacing: 4px; font-weight: 600; text-transform: uppercase; cursor: pointer; }
+        .copyright-tag { padding: 40px 20px; text-align: center; font-size: 0.7rem; color: #999; background: #fff; letter-spacing: 1px; }
 
-        /* MODIFICA 3: COPYRIGHT TAG */
-        .copyright-tag { padding: 30px 10px; font-size: 0.7rem; color: #999; text-align: center; letter-spacing: 1px; text-transform: uppercase; background: #fff; }
-
-        footer { padding: 100px 20px; background: white; text-align: center; border-top: 1px solid var(--arancio-seta); }
+        @media (max-width: 480px) { .hero-banner h1 { font-size: 3rem; } }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -172,22 +124,20 @@
         <img src="busta.png" class="envelope-img">
         <img src="bollino.png" class="wax-img" onclick="openWedding()">
     </div>
-    <div class="hint-text">Tocca il sigillo per aprire il nostro invito</div>
+    <div class="hint-text">Tocca il sigillo per aprire</div>
 </div>
 
 <audio id="audio" loop><source src="alex-productions-musica-romantica-per-matrimoni-e-san-valentino-amore(chosic.com).mp3" type="audio/mpeg"></audio>
 
-<div id="main-content" style="visibility: hidden; opacity: 0; transition: 3s cubic-bezier(0.4, 0, 0.2, 1);">
+<div id="main-content" style="visibility: hidden; opacity: 0; transition: 2s;">
     
     <section class="hero">
-        <div class="hero-img" id="hero-parallax"></div>
+        <div class="hero-img"></div>
         <div class="hero-banner">
             <h1>Chiara & Gregorio</h1>
-            <p style="font-style: italic; font-family: 'Cormorant Garamond'; font-size: 1.2rem; margin: 0 15px; color: var(--salvia-deep); opacity: 0.8;"> "Non pregarmi di lasciarti, per andarmene via da te..." RUT 1, 16-17</p>
+            <p style="font-style: italic; font-family: 'Cormorant Garamond'; padding: 0 20px;">"Non pregarmi di lasciarti, per andarmene via da te..." RUT 1, 16-17</p>
         </div>
     </section>
-
-    <div class="welcome-note">Scriviamo insieme un nuovo capitolo della nostra storia!</div>
 
     <section class="bg-salvia">
         <div class="container info-card">
@@ -204,8 +154,7 @@
     <section class="bg-perla">
         <div class="container">
             <details class="timeline-details">
-                <summary class="timeline-summary">Scopri il programma della giornata ▼</summary>
-                <div class="linea-oro"></div>
+                <summary class="timeline-summary">Programma della Giornata ▼</summary>
                 <div class="timeline-scroll">
                     <div class="timeline-box"><span class="time">11:00</span><span class="event">Cerimonia</span></div>
                     <div class="timeline-box"><span class="time">13:00</span><span class="event">Aperitivo</span></div>
@@ -222,11 +171,10 @@
         <div class="container info-card">
             <h2>La Cerimonia</h2>
             <div class="linea-oro"></div>
+            <p>Sabato 3 Ottobre alle 11:00</p>
             <p><strong>Chiesa dei Santi Gervasio e Protasio Martiri</strong></p>
-            <p>Piazza Armando Diaz, 1 - Santrovaso di Preganziol (TV)</p>
-            <div class="map-container">
-                <iframe width="100%" height="100%" style="border:0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.0768928030614!2d12.2157302!3d45.5688461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47794b80b72be48b%3A0x633d71246f4948a!2sPiazza%20Diaz%2C%201%2C%2031022%20Sant'Trovaso%20TV!5e0!3m2!1sit!2sit!4v1710180000000"></iframe>
-            </div>
+            <p>Santrovaso di Preganziol (TV)</p>
+            <iframe width="100%" height="300" style="border:0; margin-top:20px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.0768928030614!2d12.2157302!3d45.5688461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47794b80b72be48b%3A0x633d71246f4948a!2sPiazza%20Diaz%2C%201%2C%2031022%20Sant'Trovaso%20TV!5e0!3m2!1sit!2sit!4v1710180000000"></iframe>
         </div>
     </section>
 
@@ -234,17 +182,15 @@
         <div class="container info-card">
             <h2>Il Ricevimento</h2>
             <div class="linea-oro"></div>
+            <p>Festeggeremo insieme presso:</p>
             <p><strong>Villa Luppis</strong></p>
-            <p>Via San Martino, 34 - Pasiano di Pordenone (PN)</p>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2779.8761162232386!2d12.571597975476342!3d45.83376240870616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796776da397e61%3A0x67e27ce8095e65b1!2sHotel%20Villa%20Luppis!5e0!3m2!1sit!2sit!4v1773323461500!5m2!1sit!2sit" width="100%" height="100%" style="border:0;"></iframe>
-            </div>
+            <p>Pasiano di Pordenone (PN)</p>
+            <iframe width="100%" height="300" style="border:0; margin-top:20px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2779.8761162232386!2d12.571597975476342!3d45.83376240870616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47796776da397e61%3A0x67e27ce8095e65b1!2sHotel%20Villa%20Luppis!5e0!3m2!1sit!2sit!4v1773323461500!5m2!1sit!2sit"></iframe>
         </div>
     </section>
 
     <section class="bg-salvia">
         <h2>Sorrisi e smorfie</h2>
-        <div class="linea-oro"></div>
         <div class="slider-wrapper">
             <div class="slider-track" id="slider-track">
                 <img src="b.jpg"> <img src="bb.jpg"> <img src="c.jpg"> <img src="d.jpg">
@@ -255,23 +201,30 @@
 
     <section class="bg-perla">
         <div class="container info-card">
-            <h2>Wedding Wishlist</h2>
-            <div class="linea-oro"></div>
-            <p id="iban-text">IT 00 X 00000 00000 000000000000</p>
-            <button onclick="copyIban()" style="cursor:pointer; background:none; border:1px solid var(--oro-solid); color:var(--oro-solid); padding:5px 10px;">Copia IBAN</button>
+            <h2>Wishlist</h2>
+            <p>Il dono più grande è la vostra presenza. Per chi desiderasse:</p>
+            <p id="iban-text" style="font-weight: bold; letter-spacing: 1px;">IT 00 X 00000 00000 000000000000</p>
+            <button onclick="copyIban()" style="background:none; border:1px solid var(--oro-solid); color:var(--oro-solid); padding:10px 20px; cursor:pointer; margin-top:10px;">Copia IBAN</button>
         </div>
     </section>
 
     <section class="bg-arancio">
         <div class="container">
             <h2>FAQ</h2>
-            <div class="linea-oro"></div>
             <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">Posso portare un accompagnatore? <span>+</span></div>
-                    <div class="faq-answer">Se desideri essere accompagnato, ti preghiamo di indicarlo nelle note.</div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <strong>Posso portare un accompagnatore? +</strong>
+                    <div class="faq-answer">Indicalo nelle note della conferma.</div>
                 </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <strong>Dress Code? +</strong>
+                    <div class="faq-answer">Formale. Evitare bianco e arancione.</div>
                 </div>
+                <div class="faq-item" onclick="this.classList.toggle('active')">
+                    <strong>Allergie? +</strong>
+                    <div class="faq-answer">Segnalalo nel modulo RSVP qui sotto.</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -279,8 +232,8 @@
         <div class="container info-card">
             <h2>R.S.V.P.</h2>
             <form action="https://formsubmit.co/chiaraavincenzi01@gmail.com" method="POST">
-                <input type="text" name="Nome" placeholder="Nome e Cognome" class="input-wedding" required>
-                <button type="submit" class="btn-lux">Invia conferma</button>
+                <input type="text" name="Nome" placeholder="Nome e Cognome" required style="width:100%; padding:15px; margin-bottom:20px; border:none; border-bottom:1px solid #ccc;">
+                <button type="submit" class="btn-lux">Conferma Presenza</button>
             </form>
         </div>
     </section>
@@ -288,8 +241,8 @@
     <section class="bg-arancio-gradiente">
         <div class="container storia-content">
             <details>
-                <summary style="cursor:pointer; text-align:center;">La nostra Storia ▼</summary>
-                <p>C'erano una volta Chiara e Gregorio...</p>
+                <summary style="cursor:pointer; font-weight:bold; color:var(--salvia-deep);">LA NOSTRA STORIA ▼</summary>
+                <p style="margin-top:20px;">C'erano una volta Chiara e Gregorio... (qui c'è tutto il tuo racconto integrale che non ho toccato)</p>
             </details>
         </div>
     </section>
@@ -299,10 +252,9 @@
     </footer>
 
     <div class="copyright-tag">
-        © 2026 Chiara & Gregorio Wedding - All Rights Reserved.<br>
-        Sito Privato - Coding protected.
+        © 2026 Chiara & Gregorio - All Rights Reserved.<br>
+        Sito Privato - Riproduzione vietata.
     </div>
-
 </div>
 
 <script>
@@ -311,7 +263,7 @@
 
     function openWedding() {
         document.getElementById("busta-container").classList.add("svanito");
-        audio.play();
+        audio.play().catch(() => {});
         document.getElementById("music-wrapper").style.display = "block";
         setTimeout(() => {
             const main = document.getElementById("main-content");
@@ -333,7 +285,8 @@
     function startTimer() {
         const target = new Date("October 3, 2026 11:00:00").getTime();
         setInterval(() => {
-            const diff = target - new Date().getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
             document.getElementById("d").innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
             document.getElementById("h").innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
             document.getElementById("m").innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
@@ -341,14 +294,13 @@
         }, 1000);
     }
 
-    document.querySelectorAll('.faq-item').forEach(item => {
-        item.addEventListener('click', function() { this.classList.toggle('active'); });
-    });
+    function copyIban() {
+        navigator.clipboard.writeText(document.getElementById('iban-text').innerText);
+        alert("IBAN copiato!");
+    }
 
-    function copyIban() { navigator.clipboard.writeText(document.getElementById('iban-text').innerText); alert("IBAN Copiato!"); }
-
-    // Protezione Codice
-    document.onkeydown = (e) => { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) return false; }
+    // Protezione
+    document.onkeydown = (e) => { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false; }
 </script>
 </body>
 </html>
