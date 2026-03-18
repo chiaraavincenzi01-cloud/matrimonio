@@ -343,11 +343,11 @@
                 <div class="linea-oro"></div>
                 <p>Conferma la tua presenza entro il</p>
                 <p style="font-size: 1.6rem; font-family: 'Cormorant Garamond'; color: var(--salvia-deep); font-weight: 600;">30 Agosto 2026</p>
-                <form class="form-container" action="https://api.sheetmonkey.io/form/K1EMbatP5VPadRqgQ3HiG" method="POST" onsubmit="alert('Grazie di cuore! La tua conferma è stata registrata.');">
+                <form id="rsvp-form" class="form-container" action="https://api.sheetmonkey.io/form/K1EMbatP5VPadRqgQ3HiG" method="POST">
                     <input type="text" name="Nome" placeholder="Nome e Cognome" class="input-wedding" required>
                     <textarea name="Allergie" rows="2" placeholder="Scrivi qui se hai allergie o intolleranze" class="input-wedding"></textarea>
                     <textarea name="Messaggio" rows="2" placeholder="Altre note per gli sposi" class="input-wedding"></textarea>
-                    <button type="submit" class="btn-lux">Invia conferma</button>
+                    <button type="submit" class="btn-lux" id="btn-submit">Invia conferma</button>
                 </form>
             </div>
         </div>
@@ -363,7 +363,7 @@
                     </summary>
                     <h2 style="text-align: center;">La nostra Storia</h2>
                     <div class="storia-decor">~ ❦ ~</div>
-                       <p class="capolettera">C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita...</p>
+                                          <p class="capolettera">C'erano una volta, in un piccolo paesino chiamato Santrovaso, avvolto dal profumo dei campi e dal canto degli uccelli, due bambini di nome Chiara e Gregorio, legati da un curioso filo invisibile che li avrebbe resi inseparabili, uniti per la vita...</p>
                
                 <p>A dire il vero, la loro storia aveva inizio molto prima della loro nascita in un intrico di parentele che li legava come rami di un unico albero: Nello specifico Marta, la mamma della ragazza e Simone, il padre del ragazzo, erano cugini di terzo grado. Il che rendeva i protagonisti, cugini di quinto grado.</p>
                
@@ -499,6 +499,34 @@
         const parallax = document.getElementById('hero-parallax');
         if(parallax) parallax.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
     });
+
+    /* NUOVO SCRIPT PER INVIO SENZA CAMBIARE PAGINA */
+    const rsvpForm = document.getElementById('rsvp-form');
+    rsvpForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('btn-submit');
+        const originalText = btn.innerText;
+        btn.innerText = "INVIO IN CORSO...";
+        btn.disabled = true;
+
+        const formData = new FormData(rsvpForm);
+
+        fetch(rsvpForm.action, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors' // Necessario per SheetMonkey
+        }).then(() => {
+            alert('Grazie di cuore! La tua conferma è stata registrata correttamente.');
+            btn.innerText = "CONFERMA INVIATA!";
+            rsvpForm.reset();
+        }).catch(error => {
+            alert('Ops! Qualcosa è andato storto. Riprova più tardi.');
+            btn.innerText = originalText;
+            btn.disabled = false;
+        });
+    });
 </script>
 </body>
 </html>
+
+                 
